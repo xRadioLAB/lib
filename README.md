@@ -18,7 +18,7 @@ PS: 使用方法不定期补全。。。如果我有时间的话😅
 3. 发布生产模式之前，请务必进行本地测试
 
 ## API
-### __jquery.browser.min.js__
+### _jquery.browser.min.js_
 #### Detail:
 - `$.browser() // 返回browser关键字对象`
 - `browser` :string 浏览器
