@@ -38,3 +38,9 @@ $(function() {
     }
 });
 ```
+#### Tips:
+初始化 `$.browser();` 之后，_jquery.browser.min.js_ 会给html标签添加识别的`class`类名：
+```html
+<html class="oldie">
+```
+跟进html的类名使用css递进选择器您可以很方便的制作对应浏览器的hacks，能够完美实现渐进式增强，几乎无需使用旧式的 `_`、`*`的css hacks。
