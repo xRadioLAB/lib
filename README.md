@@ -6,25 +6,24 @@ __*lib*__ 是我个人收集的比较常用的js框架集合, 直接`<script>`�
 
 PS: 使用方法不定期补全。。。如果我有时间的话😅
 
-## __*How to use*__
+## How to use?
 
 1. 详细本 **README.md** 和对应模块的 **API**
 2. 下载仓库到本地使用
 
-## __*Notices*__
+## Notices
 
 1. 尽可能的使用 **`.min`** 的压缩版本
 2. 尽可能使用最新版本的js库文件
 3. 发布生产模式之前，请务必进行本地测试
 
-## __*API*__
+## API
 ### jquery.browser.min.js
-
 #### Detail:
-    - `$.browser() // 返回browser关键字对象`
-    - `browser` 浏览器
-    - `version` 浏览器版本
-    - `device`  设备
+- `$.browser() // 返回browser关键字对象`
+- `browser` :string 浏览器
+- `version` :string 浏览器版本
+- `device`  :string 设备
 
 #### Demo:
 ```javascript
