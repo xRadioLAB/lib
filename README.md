@@ -18,9 +18,13 @@ PS: 使用方法不定期补全。。。如果我有时间的话😅
 3. 发布生产模式之前，请务必进行本地测试
 
 ## API
+
 ### _jquery.browser.min.js_
+
 #### Detail:
-- `$.browser() // 返回browser关键字对象`
+
+`$.browser() // 返回browser关键字对象`
+
 - `browser` :string 浏览器
 - `version` :string 浏览器版本
 - `device`  :string 设备
@@ -29,11 +33,9 @@ PS: 使用方法不定期补全。。。如果我有时间的话😅
 ```javascript
 $(function() {
     // 初始化browser
-    var browser = $.browser();
-    console.log(browser); // 返回结果object：{browser: "chrome", version: "537.36", device: "mac"}
-
+    var browser = $.browser(); // 返回结果格式 {browser: "chrome", version: "537.36", device: "mac"}
     // 使用 browser || version || device 实现自定义的浏览器识别
-    if (browser.version < 9.0 && browser.browser === 'ie') {
+    if (browser.version < 9.0 && browser.browser === 'ie') { // 判断是否为ie9以下浏览器
         // todo sth..
     }
 });
