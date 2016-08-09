@@ -1,55 +1,41 @@
 # **lib**
 
-**_lib_** 是我个人收集的比较常用的js框架集合, 直接`<script>`标签链接到页面即可使用。
+__*lib*__ 是我个人收集的比较常用的js框架集合, 直接`<script>`标签链接到页面即可使用。
 
 欢迎您 **`Start`**, 我们会不定期更新
 
 PS: 使用方法不定期补全。。。如果我有时间的话😅
 
-## How to use?
+## __*How to use*__
 
 1. 详细本 **README.md** 和对应模块的 **API**
 2. 下载仓库到本地使用
 
-## Notices
+## __*Notices*__
 
 1. 尽可能的使用 **`.min`** 的压缩版本
 2. 尽可能使用最新版本的js库文件
 3. 发布生产模式之前，请务必进行本地测试
 
-`maps` 文件夹及 `.map` 文件很多时候不是必须上传的文件，但我还是建议您在实际使用中自行测试。
-
-## API
-
-### _jquery.browser.min.js_
+## __*API*__
+### jquery.browser.min.js
 
 #### Detail:
-
-`$.browser() // 返回browser关键字对象`
-
-- `browser` _:string_ 浏览器
-- `version` _:string_ 浏览器版本
-- `device` _:string_ 设备
+    - `$.browser() // 返回browser关键字对象`
+    - `browser` 浏览器
+    - `version` 浏览器版本
+    - `device`  设备
 
 #### Demo:
-
 ```javascript
 $(function() {
     // 初始化browser
-    var browser = $.browser(); // 返回结果格式 {browser: "chrome", version: "537.36", device: "mac"}
+    var browser = $.browser();
+    console.log(browser); // 返回结果object：{browser: "chrome", version: "537.36", device: "mac"}
+
     // 使用 browser || version || device 实现自定义的浏览器识别
-    if (browser.version < 9.0 && browser.browser === 'ie') { // 判断是否为ie9以下浏览器
+    if (browser.version < 9.0 && browser.browser === 'ie') {
         // todo sth..
     }
 });
 ```
-
-#### Tips:
-
-初始化 `$.browser();` 之后，_jquery.browser.min.js_ 会给html标签添加识别的`class`类名，例如（但不限于）下面的格式：
-
-```html
-<html class="oldie">
-```
-
-使用css递进选择器您可以很方便的制作对应浏览器的css hacks，它们能够完美实现渐进式增强，几乎无需使用旧式的 `_`、`*`的css hacks。
