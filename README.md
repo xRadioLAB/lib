@@ -18,4 +18,4 @@
 ## **_Tips_**
 
 - 为了便于开发和迭代，今后将采用模块文件夹方式管理，js库使用单独的文件夹存放。
-- 大部分的js库都是来自MIT协议的github js库，他们的API可以直接通过文件名在 github 或着 [@xinhuaRadioLAB](https://github.com/xinhuaRadioLAB) 找到。如果您无法找到正确的API，欢迎联系[我](https://github.com/superwoods)。
+- 大部分的js库都是来自MIT协议的github js库，他们的API可以直接通过文件名在 github 或 [@xinhuaRadioLAB](https://github.com/xinhuaRadioLAB) 找到。如果您无法找到正确的API，欢迎联系[@Superwoods](https://github.com/superwoods)。
