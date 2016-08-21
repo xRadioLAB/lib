@@ -10,7 +10,7 @@
  *          2016-07-11-15.04
  *
  * @(demo)Last modified by:   SuperWoods
- * @(demo)Last modified time: 2016-08-21-08:04:03
+ * @(demo)Last modified time: 2016-08-21-08:33:15
  */
 
 (function () {
@@ -44,8 +44,8 @@
     var UA = navigator.userAgent.toLowerCase();
     var version = (UA.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1];
 
-    var browser = null;
-    var device = null;
+    var browser = 'unknown';
+    var device = 'unknown';
 
     // browser
     var msie = UA.indexOf(b.msie) > 0;
@@ -103,9 +103,9 @@
         UA: UA
     };
 
-    if (MOBILE) {
-        console.log(MOBILE);
-    }
+    // if (MOBILE) {
+    //     console.log(MOBILE);
+    // }
 
     console.log('BROWSER');
 })();
