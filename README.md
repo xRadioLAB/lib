@@ -1,41 +1,20 @@
 # **lib**
 
-__*lib*__ 是我个人收集的比较常用的js框架集合, 直接`<script>`标签链接到页面即可使用。
+**_lib_** 是我个人收集的比较常用的js框架集合, 直接使用 `<script>` 标签链接到页面即可使用。
 
-欢迎您 **`Start`**, 我们会不定期更新
+## **_How to use_**
 
-PS: 使用方法不定期补全。。。如果我有时间的话😅
+1. 详细阅读 **_README.md_** 和对应模块的 **_API_**
+2. 建议您 copy **_dist_** 中 **_.min_** 的压缩版本到您本地的开发文档 **_js_** 文件夹进行使用
+3. 建议您下载仓库到本地使用
 
-## __*How to use*__
+## **_Notices_**
 
-1. 详细本 **README.md** 和对应模块的 **API**
-2. 下载仓库到本地使用
-
-## __*Notices*__
-
-1. 尽可能的使用 **`.min`** 的压缩版本
-2. 尽可能使用最新版本的js库文件
+1. 尽可能的使用 **_dist_** 中 **.min** 的压缩版本
+2. 尽可能使用最新版本的 **_lib_** 库
 3. 发布生产模式之前，请务必进行本地测试
+4. 为了便于您本地开发文档的版本控制，请将 `lib/` 添加至您的 **_.gitignore_** 文件中。这样 **_lib_** 将不会上传至git服务器
 
-## __*API*__
-### jquery.browser.min.js
+## **_Tips_**
 
-#### Detail:
-    - `$.browser() // 返回browser关键字对象`
-    - `browser` 浏览器
-    - `version` 浏览器版本
-    - `device`  设备
-
-#### Demo:
-```javascript
-$(function() {
-    // 初始化browser
-    var browser = $.browser();
-    console.log(browser); // 返回结果object：{browser: "chrome", version: "537.36", device: "mac"}
-
-    // 使用 browser || version || device 实现自定义的浏览器识别
-    if (browser.version < 9.0 && browser.browser === 'ie') {
-        // todo sth..
-    }
-});
-```
+为了便于单独模块的开发和迭代，今后将采用文件夹模块管理方式，整理全部 js 库文件为单独的文件夹存放。
