@@ -1,4 +1,4 @@
-# **jquery.browser.js**
+# **browser.js**
 
 ## Detail:
 
