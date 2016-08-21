@@ -47,19 +47,19 @@ jQuery.browser =
     //     }
     //     return (/msie/.test(UA) && !/opera/.test(UA) && ((UA.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1]) < 9.0);
     // },
-    function (options) {
+    function (opt) {
         var $html, UA;
 
-        if (!options || !options.tag) {
+        if (!opt || !opt.tag) {
             $html = $('html');
         } else {
-            $html = options.tag;
+            $html = opt.tag;
         }
         // 声明 UA
-        if (!options || !options.UA) {
+        if (!opt || !opt.UA) {
             UA = navigator.userAgent.toLowerCase();
         } else {
-            UA = options.UA;
+            UA = opt.UA;
         }
 
         // 浏览器识别
