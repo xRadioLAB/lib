@@ -47,7 +47,7 @@ jQuery.browser =
     //     }
     //     return (/msie/.test(UA) && !/opera/.test(UA) && ((UA.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1]) < 9.0);
     // },
-    function(options) {
+    function (options) {
         var $html, UA;
 
         if (!options || !options.tag) {
