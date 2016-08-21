@@ -1,7 +1,7 @@
 {
-    "name": "jquery.browser.js",
+    "name": "browser.js",
     "version": "0.2.0",
-    "description": "jquery.browser.js",
+    "description": "browser.js",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/xinhuaRadioLAB/lib.git"

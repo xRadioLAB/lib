@@ -30,7 +30,7 @@ module.exports = function (grunt) {
             },
             execute: {
                 files: {
-                    'dist/jquery.browser.min.js': ['dist/jquery.browser.js'],
+                    'dist/browser.min.js': ['dist/browser.js'],
                 }
             }
         },
