@@ -4,7 +4,7 @@
 
 - _**browser.js**_ without jQuery.
 - 添加 _**browser.min.js**_ 的页面，将自动识别终端设备，移动设备能够自动跳转到 `/mobile.htm`。
-- 添加 `window.BROWSER` 对象，通过他我们可以添加更多浏览器自定义扩展。您可以直接在控制台使用 `console.log(window.BROWSER)` 可以查看。
+- 添加 `window.BROWSER` 对象，通过他我们可以添加更多浏览器自定义扩展。您可以直接在控制台使用 `console.log(window.BROWSER)` 查看。
 
 ## _**API**_
 
@@ -25,7 +25,7 @@ hash 开关直接使用 hash 即可开启，页面地址栏尾部添加 `#pc`, �
 下面是一个使用扩展参数的demo：
 
 ```html
-  <script src="../browser.min.js" id="BROWSER_NOJUMP" name="BROWSER_JUMP_PAD"></script>
+<script src="../browser.min.js" id="BROWSER_NOJUMP" name="BROWSER_JUMP_PAD"></script>
 ```
 
 ### _**Extensions**_
@@ -33,7 +33,7 @@ hash 开关直接使用 hash 即可开启，页面地址栏尾部添加 `#pc`, �
 自定义扩展，通过实例化 `window.BROWSER` 来添加自定义扩展：
 
 ```javascript
-// 实例化 window.BROWSER
+// 声明一个变量 browser
 var browser = window.BROWSER;
 // 例如在 mac chrome中，此时得到结果： {browser: "chrome", version: "537.36", device: "mac", UA: "..."}
 
