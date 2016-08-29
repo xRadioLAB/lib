@@ -6,7 +6,7 @@
 - 添加 _**browser.min.js**_ 的页面，将自动识别终端设备，移动设备能够自动跳转到 `/mobile.htm`。
 - 添加 `window.BROWSER` 对象，通过他我们可以添加更多浏览器自定义扩展。您可以直接在控制台使用 `console.log(window.BROWSER)` 查看。
 
-## _**API**_
+## _**Functions**_
 
 _**browser.js**_ 拥有一个hash开关和两个内置扩展功能，**所有API都是可选的，默认不使用**：
 
