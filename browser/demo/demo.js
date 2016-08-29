@@ -7,21 +7,18 @@
  * @Date:   2016-08-21-05:08:24
  *
  * @(demo)Last modified by:   SuperWoods
- * @(demo)Last modified time: 2016-08-29-12:15:41
+ * @(demo)Last modified time: 2016-08-29-04:52:40
  */
-window.onload = function () {
-    var wb = window.BROWSER;
-    console.log(wb);
-    if (wb) {
+// window.onload = function () {
+var browser = window.BROWSER;
+if (browser) {
+    var htmlClass = document.getElementsByTagName('html')[0].getAttribute('class');
+    document.getElementById('text').innerHTML =
+        '<li><b>html class:</b>' + htmlClass + '</li>' +
+        '<li><b>device: </b>' + browser.device + '</li>' +
+        '<li><b>browser: </b>' + browser.browser + '</li>' +
+        '<li><b>version: </b>' + browser.version + '</li>' +
+        '<li><b>UA: </b>' + browser.UA + '</li>';
 
-        var htmlClass = document.getElementsByTagName('html')[0].getAttribute('class');
-
-        document.getElementById('text').innerHTML =
-            '<li><b>html class:</b>' + htmlClass + '</li>' +
-            '<li><b>device: </b>' + wb.device + '</li>' +
-            '<li><b>browser: </b>' + wb.browser + '</li>' +
-            '<li><b>version: </b>' + wb.version + '</li>' +
-            '<li><b>UA: </b>' + wb.UA + '</li>';
-
-    }
-};
+}
+// };
