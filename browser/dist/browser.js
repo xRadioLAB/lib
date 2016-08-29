@@ -10,7 +10,7 @@
  *          2016-07-11-15.04
  *
  * @(demo)Last modified by:   SuperWoods
- * @(demo)Last modified time: 2016-08-29-01:45:42
+ * @(demo)Last modified time: 2016-08-29-02:57:07
  */
 
 (function () {
@@ -137,7 +137,7 @@
                 console.log('isPad');
 
                 // 是否开始pad跳转
-                var isJUMP_PAD = document.getElementsByName('JUMP_PAD').length > 0; // 默认：不开启
+                var isJUMP_PAD = document.getElementsByName('BROWSER_JUMP_PAD').length > 0; // 默认：不开启
                 // console.log('isJUMP_PAD', isJUMP_PAD);
                 console.log('isJUMP_PAD:', isJUMP_PAD);
 

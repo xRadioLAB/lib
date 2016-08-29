@@ -1,34 +1,77 @@
 # **browser.js**
 
-## How to use
+## _**Introduction**_
 
-- _browser.js_ 无需 jquery 依赖
-- 使用 _browser.js_ 给 **window** 添加 **BROWSER** 对象，可以使用 `window.BROWSER` 查看结果
+- _**browser.js**_ without jQuery
+- 添加 `window.BROWSER` 对象，通过他我们可以添加更多浏览器自定义扩展。您可以直接在控制台使用 `console.log(window.BROWSER)` 可以查看。
+- 添加 _**browser.min.js**_ 的页面，将自动识别终端设备，移动设备能够自动跳转到 `/mobile.htm`
+
+## _**API**_
+
+_**browser.js**_ 拥有一个hash开关和两个配置参数，**所有API都是可选的，默认不开启**：
+
+### hash 开关:
+
+hash 开关直接使用 hash 即可开启，页面地址栏尾部添加 `#pc`, 将停止移动设备自动跳转至手机页面。 同时 `<html>` 标签会添加 `pcMod` 的 class 类，用于单独标记这个页面状态。
+
+### 配置参数:
+
+扩展配置通过 `id` 和 `name` 进行设置，**他们可以同时或单独添加使用**:
+
+1. `id="BROWSER_NOJUMP"` 关闭手机版跳转，移动设备将停止自动跳转至手机页面。
+
+2. `name="BROWSER_JUMP_PAD"` 开启pad设备跳转，pad设备将自动跳转至 `/pad.htm`。
+
+下面是一个使用扩展参数的demo：
+
+```html
+  <script src="../browser.min.js" id="BROWSER_NOJUMP" name="BROWSER_JUMP_PAD"></script>
+```
+
+### _**Extensions**_
+
+自定义扩展，通过实例化 `window.BROWSER` 来添加自定义扩展：
 
 ```javascript
 // 实例化 window.BROWSER
 var browser = window.BROWSER;
-// 例如在 mac chrome会得到结果： {browser: "chrome", version: "537.36", device: "mac"}
+// 例如在 mac chrome中，此时得到结果： {browser: "chrome", version: "537.36", device: "mac", UA: "..."}
 
-// 使用 browser || version || device 实现自定义的浏览器识别
+// 使用 browser || version || device || UA 实现自定义的浏览器识别
 if (browser.version < 9.0 && browser.browser === 'ie') {
-    // todo...
+    // todo sth...
 }
 ```
 
-## API
+## _**Tips**_
 
-_browser.js_ 通过浏览器 UA 识别浏览器和设备信息，浏览器兼容主要通过给 `html` 标签添加 `class` 的方法实现。
+_browser.js_ 通过javascript的浏览器 **`navigator.userAgent`** 识别浏览器和设备信息，浏览器兼容主要通过给 `<html>` 标签添加 `class` 的方法实现。
 
-### 一般情况下：
+### 通常情况下：
 
-例如mac电脑中的chrome浏览器，html标签将获得`class`为`chrome mac`, 如果你想给这个设备的浏览器设置单独的样式，即可在您的样式表中添加：
+例如：mac电脑中的chrome浏览器，`<html>`标签将自动识别为`<html class="chrome mac">`, 如果你想给这个设备的浏览器设置单独的样式，即可在您的样式表文件中添加样式：
 
 ```css
-.style1 { background: green; } /* 非 chrome浏览器 中 style1 背景为绿色 */
-.chrome .style1 { background: red; } /* chrome浏览器中 style1 背景色变为红色 */
+.style1 { background: green; } /* 全部非 chrome浏览器中 .style1 背景为绿 */
+.chrome .style1 { background: red; } /* chrome浏览器中 .style1 背景色变为红 */
 ```
 
-### 未知浏览器:
+## ie 浏览器类（**非常重要**）：
 
-设备如果遇到无法识别的浏览器将返回 `class`名： `unknown`，例如微信内置的浏览器。
+所有 ie 浏览器将自动添加 `ie` 类，用于区别其他浏览器，低于 ie8 的版本将出现 `oldie`，edge 将出现`ie11` 或 `edge` （也可能同时出现）, 其他版本（9、10）将出现对应的ie版本`ie9`、`ie10`。
+
+### `unknown` 未知浏览器:
+
+无法识别的浏览器和设备将返回`unknown`，例如一部iPhone手机中的微信内置的浏览器，将可能会出现 `<html class="unknown iphone">`。
+
+## _**Bugs**_
+
+由于目前我们缺少android、小米、windows phone等终端设备，所以这些设备的识别可靠性有待后续验证。
+
+--------------------------------------------------------------------------------
+
+如果您想捐赠我们，您可以 e-mail 我：_**st_sister@iCloud.com**_ 沟通, PS: 请我喝杯☕️是个不错的选择哦！😊
+
+Have fun~
+
+Chrees🍻
