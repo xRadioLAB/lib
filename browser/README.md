@@ -45,7 +45,7 @@ if (browser.version < 9.0 && browser.browser === 'ie') {
 
 ## _**Tips**_
 
-_**browser.js**_ 通过javascript对象 **`navigator.userAgent`** 实现判断浏览器和设备识别，自动给 `<html>` 标签添加带有浏览器信息的 `class` 类来控制兼容性调整所需要的 hacks。
+_**browser.js**_ 通过javascript对象 **`navigator.userAgent`** 实现判断浏览器和设备识别，自动给 `<html>` 标签添加带有浏览器信息的 `class` 类来控制兼容性调整所需要的 _**css hacks**_, 所以使用 _**browser.js**_ 几乎不会造成产生非标准的 class 类的问题。
 
 ### 通常情况下：
 
