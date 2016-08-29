@@ -45,7 +45,7 @@ if (browser.version < 9.0 && browser.browser === 'ie') {
 
 ## _**Tips**_
 
-_browser.js_ 通过javascript的浏览器 **`navigator.userAgent`** 识别浏览器和设备信息，浏览器兼容主要通过给 `<html>` 标签添加 `class` 的方法实现。
+_**browser.js**_ 通过javascript对象 **`navigator.userAgent`** 实现判断浏览器和设备识别，自动给 `<html>` 标签添加带有浏览器信息的 `class` 类来控制兼容性调整所需要的 hacks。
 
 ### 通常情况下：
 
