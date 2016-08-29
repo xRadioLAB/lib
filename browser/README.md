@@ -1,5 +1,7 @@
 # **browser.js**
 
+demo: https://xinhuaradiolab.github.io/lib/browser/index.htm
+
 ## _**Introduction**_
 
 - _**browser.js**_ without jQuery.
@@ -73,6 +75,8 @@ _**browser.js**_ 通过javascript对象 **`navigator.userAgent`** 实现判断�
 如果您想捐赠我们，您可以 e-mail 我：_**st_sister@iCloud.com**_ 沟通。
 
 PS: 一起喝杯☕️是个不错的开始哦！😊
+
+ 
 
 Have fun~
 
