@@ -4,19 +4,19 @@
 
 - _**browser.js**_ without jQuery.
 - 添加 _**browser.min.js**_ 的页面，将自动识别终端设备，移动设备能够自动跳转到 `/mobile.htm`。
-- 添加 `window.BROWSER` 对象，通过他我们可以添加更多浏览器自定义扩展。您可以直接在控制台使用 `console.log(window.BROWSER)` 可以查看。
+- 添加 `window.BROWSER` 对象，通过他我们可以添加更多浏览器自定义扩展。您可以直接在控制台使用 `console.log(window.BROWSER)` 查看。
 
-## _**API**_
+## _**Functions**_
 
-_**browser.js**_ 拥有一个hash开关和两个内置扩展功能，**所有API都是可选的，默认不使用**：
+_**browser.js**_ 拥有一个hash开关和两个内置扩展功能，**所有功能都是可选的，默认不使用**：
 
-### hash 开关:
+### hash 开关功能:
 
-hash 开关直接使用 hash 即可开启，页面地址栏尾部添加 `#pc`, 将停止移动设备自动跳转至手机页面。 同时 `<html>` 标签会添加 `pcMod` 的 class 类，用于单独标记这个页面状态。
+hash 开关功能直接使用 hash 即可开启，页面地址栏尾部添加 `#pc`, 将停止移动设备自动跳转至手机页面。 同时 `<html>` 标签变为 `<html class="pcMod">`，用于单独标记这个页面状态。
 
 ### 内置扩展功能:
 
-扩展功能通过 `id` 和 `name` 进行开启，**他们可以同时或单独使用**:
+内置扩展功能通过 `id` 和 `name` 进行开启，**请注意：但使用了"关闭手机版跳转"功能后，"开启pad设备跳转"的功能会默认变为关闭状态**:
 
 1. `id="BROWSER_NOJUMP"` 关闭手机版跳转，移动设备将停止自动跳转至手机页面。
 
@@ -25,7 +25,7 @@ hash 开关直接使用 hash 即可开启，页面地址栏尾部添加 `#pc`, �
 下面是一个使用扩展参数的demo：
 
 ```html
-  <script src="../browser.min.js" id="BROWSER_NOJUMP" name="BROWSER_JUMP_PAD"></script>
+<script src="../browser.min.js" id="BROWSER_NOJUMP" name="BROWSER_JUMP_PAD"></script>
 ```
 
 ### _**Extensions**_
@@ -33,7 +33,7 @@ hash 开关直接使用 hash 即可开启，页面地址栏尾部添加 `#pc`, �
 自定义扩展，通过实例化 `window.BROWSER` 来添加自定义扩展：
 
 ```javascript
-// 实例化 window.BROWSER
+// 声明一个变量 browser
 var browser = window.BROWSER;
 // 例如在 mac chrome中，此时得到结果： {browser: "chrome", version: "537.36", device: "mac", UA: "..."}
 
@@ -45,7 +45,7 @@ if (browser.version < 9.0 && browser.browser === 'ie') {
 
 ## _**Tips**_
 
-_browser.js_ 通过javascript的浏览器 **`navigator.userAgent`** 识别浏览器和设备信息，浏览器兼容主要通过给 `<html>` 标签添加 `class` 的方法实现。
+_**browser.js**_ 通过javascript对象 **`navigator.userAgent`** 实现判断浏览器和设备识别，自动给 `<html>` 标签添加带有浏览器信息的 `class` 类来控制兼容性调整所需要的 _**css hacks**_, 所以使用 _**browser.js**_ 几乎不会造成产生非标准的 class 类的问题。
 
 ### 通常情况下：
 
@@ -70,7 +70,9 @@ _browser.js_ 通过javascript的浏览器 **`navigator.userAgent`** 识别浏览
 
 --------------------------------------------------------------------------------
 
-如果您想捐赠我们，您可以 e-mail 我：_**st_sister@iCloud.com**_ 沟通, PS: 请我喝杯☕️是个不错的选择哦！😊
+如果您想捐赠我们，您可以 e-mail 我：_**st_sister@iCloud.com**_ 沟通。
+
+PS: 一起喝杯☕️是个不错的开始哦！😊
 
 Have fun~
 
