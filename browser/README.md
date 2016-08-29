@@ -2,9 +2,9 @@
 
 ## _**Introduction**_
 
-- _**browser.js**_ without jQuery
+- _**browser.js**_ without jQuery.
+- 添加 _**browser.min.js**_ 的页面，将自动识别终端设备，移动设备能够自动跳转到 `/mobile.htm`。
 - 添加 `window.BROWSER` 对象，通过他我们可以添加更多浏览器自定义扩展。您可以直接在控制台使用 `console.log(window.BROWSER)` 可以查看。
-- 添加 _**browser.min.js**_ 的页面，将自动识别终端设备，移动设备能够自动跳转到 `/mobile.htm`
 
 ## _**API**_
 
