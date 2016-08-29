@@ -1,5 +1,7 @@
 # **browser.js**
 
+demo: https://xinhuaradiolab.github.io/lib/browser/index.htm
+
 ## _**Introduction**_
 
 - _**browser.js**_ without jQuery.
