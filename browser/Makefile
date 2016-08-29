@@ -3,11 +3,11 @@
 .PHONY: js
 js:
 	mkdir -p dist
-	babel --watch es2015/browser.js --out-file dist/browser.js
+	babel --watch es6/browser.js --out-file dist/browser.js
 
 .PHONY: server
 server:
-	browser-sync start --server --files='index.html, dist, es2015'
+	browser-sync start --server --files='index.html, dist, es6'
 
 .PHONY: clean
 clean:
