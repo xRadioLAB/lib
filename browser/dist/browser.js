@@ -253,9 +253,8 @@
     if (device === '') {
         device = ' unknown';
     }
-    var existedClass=HTML.getAttribute("class");//先获取一下html上的class,存到existedClass变量中;
-    // HTML.className += '' + device;//将这句注释掉了;
-    HTML.setAttribute("class"," "+device+" "+browser+" "+existedClass);//将拼接后的新class全部复写到html的class属性上;
+
+    HTML.className += '' + device;
 
     // 输出 BROWSER 对象
     window.BROWSER = {
