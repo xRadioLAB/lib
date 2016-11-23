@@ -75,7 +75,7 @@ _**browser.js**_ 通过javascript对象 **`navigator.userAgent`** 实现判断�
 
 ## _**Bugs**_
 
-由于目前我们缺少android、小米、windows phone等终端设备，所以这些设备的识别可靠性有待后续验证。
+由于目前我们缺少android、小米、windows phone等终端设备，所以这些设备的识别可靠性有待后续验证。如果您发现了一些bug，您可以 e-mail 我：_**st_sister@iCloud.com**_ 非常感谢您的反馈！
 
 --------------------------------------------------------------------------------
 
