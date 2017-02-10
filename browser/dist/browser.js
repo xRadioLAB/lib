@@ -13,10 +13,10 @@
  * @(demo)Last modified time: 2016-09-28-09:36:26
  */
 
-(function () {
+(function() {
     // 是否拥有 trim 方法
     if (!String.prototype.trim) {
-        String.prototype.trim = function () {
+        String.prototype.trim = function() {
             return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
         };
     }
@@ -141,26 +141,32 @@
             // 处理 mobileHref
             // 处理 .html 和 .htm
             var endName = '';
-            if (JUMPTO_URL.lastIndexOf('.html') !== -1) {
-                JUMPTO_URL = JUMPTO_URL.replace('.html', '');
-                endName = 'l';
-            } else if (JUMPTO_URL.lastIndexOf('.htm') !== -1) {
-                JUMPTO_URL = JUMPTO_URL.replace('.htm', '');
+
+            if (JUMPTO_URL.indexOf('http://') !== -1) {
+                mobileHref = JUMPTO_URL;
+            } else {
+                if (JUMPTO_URL.lastIndexOf('.html') !== -1) {
+                    JUMPTO_URL = JUMPTO_URL.replace('.html', '');
+                    endName = 'l';
+                } else if (JUMPTO_URL.lastIndexOf('.htm') !== -1) {
+                    JUMPTO_URL = JUMPTO_URL.replace('.htm', '');
+                }
+
+                if (href.lastIndexOf('index') !== -1) {
+                    if (href.lastIndexOf('.html') !== -1) {
+                        mobileHref = href.replace('index.html', JUMPTO_URL + '.html');
+                    } else if (href.lastIndexOf('.htm') !== -1) {
+                        mobileHref = href.replace('index.htm', JUMPTO_URL + '.htm');
+                    } else {
+                        mobileHref = href.replace('index', JUMPTO_URL);
+                    }
+                } else {
+                    mobileHref = '' + href + JUMPTO_URL + '.htm' + endName;
+                }
             }
 
-            if (href.lastIndexOf('index') !== -1) {
-                if (href.lastIndexOf('.html') !== -1) {
-                    mobileHref = href.replace('index.html', JUMPTO_URL + '.html');
-                } else if (href.lastIndexOf('.htm') !== -1) {
-                    mobileHref = href.replace('index.htm', JUMPTO_URL + '.htm');
-                } else {
-                    mobileHref = href.replace('index', JUMPTO_URL);
-                }
-            } else {
-                mobileHref = '' + href + JUMPTO_URL + '.htm' + endName;
-            }
             // 此时得到正确的 mobileHref
-            console.log('mobileHref:', mobileHref);
+            console.log('===========> mobileHref:', mobileHref);
 
             // 判断 pad 或 phone
             if (isMiPad || isMiBrowser || isIPad) {
