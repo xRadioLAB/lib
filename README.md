@@ -2,6 +2,12 @@
 
 **_lib_** 是我个人收集的比较常用的js框架集合, 直接使用 `<script>` 标签链接到页面即可使用。
 
+## How to use
+
+```bash
+git clone https://github.com/xinhuaRadioLAB/lib.git
+```
+
 ## **_How to use_**
 
 1. 详细阅读 **_README.md_** 和对应模块的 **_API_**
