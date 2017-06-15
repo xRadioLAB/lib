@@ -218,5 +218,5 @@
         ua: ua
     };
 
-    console.log('--------- browser.js well done!');
+    console.log('---------------------------\n> browser.js done!', BRO);
 })();
