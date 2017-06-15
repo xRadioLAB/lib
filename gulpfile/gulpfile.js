@@ -4,10 +4,13 @@
  * @Email:  st_sister@me.com
  * @Filename: gulpfile.js
  * @Last modified by:   SuperWoods
- * @Last modified time: 2017-05-24-15:01:35
+ * @Last modified time: 2017-06-15-11:23:09
  * @License: MIT
  * @Copyright: Copyright (c) Xinhuanet Inc. All rights reserved.
  */
+
+// version 0.1.1
+
 const browsersync = require('browser-sync').create();
 const gulp = require('gulp');
 const jade = require('gulp-jade');
@@ -32,7 +35,8 @@ const getTime = (formats) => {
     const now = new Date();
     return dateFormat(now, formats);
 }
-const banner = ['/**',
+const banner = [
+    '/**',
     ` * Copyright (c) 2000 - ${getTime("yyyy")} XINHUANET.com All Rights Reserved.`,
     ` * ${pkg.name} v${pkg.version}`,
     ` * @time ${getTime("yyyy-mm-dd HH:MM:ss")}`,
@@ -40,8 +44,6 @@ const banner = ['/**',
     ''
 ].join('\n');
 
-
-//browsersync
 gulp.task('browsersync', function() {
     var files = [
         '*.htm',
@@ -75,11 +77,9 @@ gulp.task('jade', function() {
 
 gulp.task('babel', function() {
     return gulp.src([
-            'js/is-pc.js',
-            'js/jplayer.playlist.mobile.js',
             'js/index.js',
         ])
-        .pipe(jsImport())
+        .pipe(jsImport()) // jsImport
         .pipe(gulp.dest('import'))
         // .pipe(sourcemaps.init())
         .pipe(plumber({
@@ -112,7 +112,6 @@ gulp.task('autowatch', function() {
 });
 
 // --------------------------------------------------------------- 生产模式压缩输出
-// indexMinCSS
 gulp.task('indexMinCSS', function() {
     gulp.src('bundle/index.css')
         .pipe(rename('index.min.css'))
@@ -129,13 +128,12 @@ gulp.task('indexMinCSS', function() {
         .pipe(gulp.dest('bundle'));
 });
 
-// indexAllMinJS
 gulp.task('indexAllMinJS', function() {
     gulp.src([
-            'bundle/swiper.min.js',
+            // 'bundle/swiper.min.js',
             // 'bundle/jquery.qrcode.min.js',
-            'bundle/jquery.jplayer.min.js',
-            'bundle/jquery.jplayer.playlist.mobile.js',
+            // 'bundle/jquery.jplayer.min.js',
+            // 'bundle/jquery.jplayer.playlist.mobile.js',
             'bundle/index.js',
         ])
         .pipe(concat('index.all.js')) //合并后的文件名
@@ -151,28 +149,23 @@ gulp.task('indexAllMinJS', function() {
         .pipe(gulp.dest('bundle'));
 });
 
-
-// isPcMinJS
-gulp.task('isPcMinJS', function() {
-    gulp.src([
-            'bundle/is-pc.js',
-            // 'bundle/jquery.qrcode.min.js',
-            // 'bundle/jquery.jplayer.min.js',
-            // 'bundle/jquery.jplayer.playlist.mobile.js',
-            // 'bundle/index.js',
-        ])
-        // .pipe(concat('index.all.js')) //合并后的文件名
-        // .pipe(gulp.dest('bundle'))
-        .pipe(stripDebug()) // 删除 console
-        .pipe(rename('is-pc.min.js'))
-        // .pipe(sourcemaps.init())
-        .pipe(uglify())
-        // .pipe(sourcemaps.write('../maps'))
-        .pipe(header(banner, {
-            pkg: pkg
-        }))
-        .pipe(gulp.dest('bundle'));
-});
+// gulp.task('single', function() {
+//     gulp.src([
+//             'bundle/name.js',
+//             // 'bundle/name1.min.js',
+//         ])
+//         // .pipe(concat('name.all.js')) //合并后的文件名
+//         // .pipe(gulp.dest('bundle'))
+//         .pipe(stripDebug()) // 删除 console
+//         .pipe(rename('name.min.js'))
+//         // .pipe(sourcemaps.init())
+//         .pipe(uglify())
+//         // .pipe(sourcemaps.write('../maps'))
+//         .pipe(header(banner, {
+//             pkg: pkg
+//         }))
+//         .pipe(gulp.dest('bundle'));
+// });
 
 // ------------------------------------------------------------------------ 命令
 // 开发模式 gulp
@@ -183,7 +176,6 @@ gulp.task('default', [
 
 // 生产模式 gulp build
 gulp.task('build', [
-    'isPcMinJS',
     'indexMinCSS',
     'indexAllMinJS',
 ]);
