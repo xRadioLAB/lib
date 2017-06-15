@@ -14,18 +14,16 @@
  */
 
 (function () {
-    var browser = '';
-    var device = '';
-
-    var mobileURI = 'mobile.htm';
-    var padURI = 'pad.htm';
-
     var ua = navigator.userAgent.toLowerCase();
     var href = window.location.href;
     var html = document.getElementsByTagName('html')[0];
     var version = (ua.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1];
 
-    // 浏览器规则
+    var browser = '';
+    var device = '';
+    var mobileURI = 'mobile.htm';
+    var padURI = 'pad.htm';
+
     var _chrome$safari$firefo = {
         chrome: 'chrome',
         safari: 'safari',
@@ -38,7 +36,18 @@
         oldie: 'oldie',
         ie9: 'ie9',
         ie10: 'ie10',
-        ie11: 'ie11'
+        ie11: 'ie11',
+        // 设备规则
+        ipad: 'ipad',
+        iphone: 'iphone',
+        iphoneOs: 'iphone os',
+        mac: 'mac',
+        macintosh: 'macintosh',
+        windows: 'windows',
+        pc: 'pc',
+        mobile: 'mobile',
+        otherMobile: 'OtherMobile',
+        android: 'android'
     },
         chrome = _chrome$safari$firefo.chrome,
         safari = _chrome$safari$firefo.safari,
@@ -51,32 +60,17 @@
         oldie = _chrome$safari$firefo.oldie,
         ie9 = _chrome$safari$firefo.ie9,
         ie10 = _chrome$safari$firefo.ie10,
-        ie11 = _chrome$safari$firefo.ie11;
-
-    // 设备规则
-
-    var _ipad$iphone$iphoneOs = {
-        ipad: 'ipad',
-        iphone: 'iphone',
-        iphoneOs: 'iphone os',
-        mac: 'mac',
-        macintosh: 'macintosh',
-        windows: 'windows',
-        pc: 'pc',
-        mobile: 'mobile',
-        otherMobile: 'OtherMobile',
-        android: 'android'
-    },
-        ipad = _ipad$iphone$iphoneOs.ipad,
-        iphone = _ipad$iphone$iphoneOs.iphone,
-        iphoneOs = _ipad$iphone$iphoneOs.iphoneOs,
-        mac = _ipad$iphone$iphoneOs.mac,
-        macintosh = _ipad$iphone$iphoneOs.macintosh,
-        windows = _ipad$iphone$iphoneOs.windows,
-        pc = _ipad$iphone$iphoneOs.pc,
-        mobile = _ipad$iphone$iphoneOs.mobile,
-        otherMobile = _ipad$iphone$iphoneOs.otherMobile,
-        android = _ipad$iphone$iphoneOs.android;
+        ie11 = _chrome$safari$firefo.ie11,
+        ipad = _chrome$safari$firefo.ipad,
+        iphone = _chrome$safari$firefo.iphone,
+        iphoneOs = _chrome$safari$firefo.iphoneOs,
+        mac = _chrome$safari$firefo.mac,
+        macintosh = _chrome$safari$firefo.macintosh,
+        windows = _chrome$safari$firefo.windows,
+        pc = _chrome$safari$firefo.pc,
+        mobile = _chrome$safari$firefo.mobile,
+        otherMobile = _chrome$safari$firefo.otherMobile,
+        android = _chrome$safari$firefo.android;
     var _isMacintosh$isIPad$i = {
         isMacintosh: ua.indexOf(macintosh) > 0,
         isIPad: ua.indexOf(ipad) > 0,
@@ -128,12 +122,12 @@
     if (isIPhone || isIPhoneOS) device += ' ' + iphone;
     if (isAndroid) device += ' ' + android;
     if (isWindows) device += ' ' + windows;
-    if (isWindowsMobile) device += ' windowsMobile';
+    if (isWindowsMobile) device += ' windows-mobile';
     if (isEdge) device += ' edge';
-    if (isMiPad) device += ' miPad';
-    if (isMiBrowser) device += ' xiaomi_miuibrowser';
+    if (isMiPad) device += ' mi-pad';
+    if (isMiBrowser) device += ' xiaomi-miuibrowser';
     if (isUCWeb) device += ' ucweb';
-    if (isPCMod) device += ' ' + pc + 'Mod';
+    if (isPCMod) device += ' ' + pc + '-mod';
 
     var isJump = typeof window.BRO_mobile === 'string' && !isPCMod;
     var hasJumpPad = typeof window.BRO_pad === 'string' && !isPCMod;
@@ -145,7 +139,7 @@
             padURI = window.BRO_pad;
         }
         console.log('------------- now !!! on pad: ', padURI);
-        // window.location.href = padURI;
+        window.location.href = padURI;
     };
 
     var jumpToMoblie = function jumpToMoblie() {
@@ -153,7 +147,7 @@
             mobileURI = window.BRO_mobile;
         }
         console.log('------------- now !!! on mobile: ', mobileURI);
-        // window.location.href = mobileURI;
+        window.location.href = mobileURI;
     };
 
     // 跳转模块
@@ -190,16 +184,14 @@
     if (browser === '') {
         browser = 'unknown';
     }
-
-    // 验证 html.className 是否为空, 如果不为空则添加 ' ' 用来分割后面的 className
-    console.log('html.className length:', html.className.length);
     // 是否拥有 trim 方法
     if (!String.prototype.trim) {
         String.prototype.trim = function trim() {
             return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
         };
     }
-
+    // 验证 html.className 是否为空, 如果不为空则添加 ' ' 用来分割后面的 className
+    // console.log('html.className length:', html.className.length);
     if (html.className.length > 0) {
         html.className = html.className.trim(); // 去除前后冗余空格
         html.className += ' ';
