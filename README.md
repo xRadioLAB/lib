@@ -17,6 +17,7 @@ git clone https://github.com/xinhuaRadioLAB/lib.git
 1.  建议使用 **.min** 压缩版本
 2.  建议添加 `lib/` 至您的 `.gitignore`, **_lib_** 将不会上传至 git 服务器
 3. 添加 lib 中的文件到 git 仓库的方法
+
   例如添加 jq.js
   ```shell
   git add -f lib/jq/jq.js
