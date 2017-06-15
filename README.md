@@ -22,7 +22,7 @@ git clone https://github.com/xinhuaRadioLAB/lib.git
   ```shell
   git add -f lib/jq/jq.js
   ```
-  PS：这种方法非常暴力，不推荐大量使用 😓
+  > PS：这种方法非常暴力，不推荐大量使用 😓
   
 ## **_Tips_**
 
