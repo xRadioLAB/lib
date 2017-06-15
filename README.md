@@ -6,7 +6,7 @@ lib 鲜美多汁，内容丰富。
 
 ## How to use
 
-```bash
+```shell
 git clone https://github.com/xinhuaRadioLAB/lib.git
 ```
 
@@ -18,12 +18,18 @@ git clone https://github.com/xinhuaRadioLAB/lib.git
 
 ## **_Notices_**
 
-1.  尽可能的使用 **_dist_** 中 **.min** 的压缩版本
-2.  尽可能使用最新版本的 **_lib_** 库
-3.  发布生产模式之前，请务必进行本地测试
-4.  为了便于您本地开发文档的版本控制，请将 `lib/` 添加至您的 **_.gitignore_** 文件中。这样 **_lib_** 将不会上传至 git 服务器
+1.  建议使用 **.min** 压缩版本
+2.  建议使用最新版本 **_lib_**
+3.  建议添加 `lib/` 至您的 `.gitignore`, **_lib_** 将不会上传至 git 服务器
+
+## 添加一个 lib 中的文件仓库提交至到 git 仓库的方法（非常暴力）
+
+例如添加 jq.js 
+
+```shell
+git add -f lib/jq/jq.js
+```
 
 ## **_Tips_**
 
--   为了便于开发和迭代，今后将采用模块文件夹方式管理，js库使用单独的文件夹存放。
--   大部分的js库都是来自MIT协议的github js库，他们的API可以直接通过文件名在 github 或 [@xinhuaRadioLAB](https://github.com/xinhuaRadioLAB) 找到。如果您无法找到正确的API，欢迎联系[@Superwoods](https://github.com/superwoods)。
+-   大部分的js库都是来自 MIT 协议的 github js 库，他们的 API 可以直接通过文件名在 github 找到。如果您无法找到正确的 API，欢迎联系[@Superwoods](https://github.com/superwoods)。
