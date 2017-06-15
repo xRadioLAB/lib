@@ -9,25 +9,23 @@
     <title>browser.js</title>
     <!-- browser.js 自定义配置：必须放在browser.js之前 -->
     <script>
-        // window.BROWSER_NOJUMP = true; // 关闭跳转
-        // window.BROWSER_NOJUMP = false; // 开启跳转
-        // window.BROWSER_JUMPTO = 'test'; // 跳转到 test.htm
-        // window.BROWSER_JUMPTO = 'mobile/index.htm';
-        window.browser_jumpto = 'mobile/index.htm';
+        var BRO_pad = '/test/pad.htm';
+        var BRO_mobile = '/test/mobile.htm';
     </script>
     <script src="/bundle/browser.js"></script>
-    <!-- <script src="dist/browser.js" id="BROWSER_NOJUMP" name="BROWSER_JUMP_PAD"></script> -->
-    <link rel="stylesheet" href="demo/demo.css">
 
+
+
+    <link rel="stylesheet" href="demo/demo.css">
 </head>
 
 <body>
-    <h1>this is pc</h1>
+    <h1>browser.js</h1>
     <ul id="text"> </ul>
     <hr> <a href="index.htm">index.htm</a>
     <br> <a href="index.htm#pc">index.htm#pc</a>
-    <!-- <br> <a href="BROWSER_JUMP_PAD.htm">BROWSER_JUMP_PAD.htm</a> -->
-    <br> <a href="BROWSER_NOJUMP.htm">BROWSER_NOJUMP.htm</a>
+
+
     <script src="demo/demo.js"></script>
 </body>
 

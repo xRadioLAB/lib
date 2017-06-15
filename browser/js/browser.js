@@ -12,21 +12,16 @@
  */
 
 (() => {
-    // 是否拥有 trim 方法
-    if (!String.prototype.trim) {
-        String.prototype.trim = function trim() {
-            return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
-        };
-    }
-
-    // ------------------------------- begin
     let browser = '';
     let device = '';
+
+    let mobileURI = 'mobile.htm';
+    let padURI = 'pad.htm';
 
     const ua = navigator.userAgent.toLowerCase();
     const href = window.location.href;
     const html = document.getElementsByTagName('html')[0];
-    const version = ((ua.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1]);
+    let version = ((ua.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1]);
 
     // 浏览器规则
     const {
@@ -140,96 +135,39 @@
     if (isUCWeb) device += ` ucweb`;
     if (isPCMod) device += ` ${pc}Mod`;
 
-    const isJump = (typeof window.BROWSER_JUMPTO === 'string' ||
-            typeof window.browser_jumpto === 'string') &&
-        !isPCMod;
+    const isJump = typeof window.BRO_mobile === 'string' && !isPCMod;
+    const hasJumpPad = typeof window.BRO_pad === 'string' && !isPCMod;
+    console.log('isJump: ', isJump);
+    console.log('hasJumpPad: ', hasJumpPad);
 
-    console.log('isJump0: ', isJump);
+    const jumpToPad = () => {
+        if (window.BRO_pad) {
+            padURI = window.BRO_pad;
+        }
+        console.log('------------- now !!! on pad: ', padURI);
+        // window.location.href = padURI;
+    }
+
+    const jumpToMoblie = () => {
+        if (window.BRO_mobile) {
+            mobileURI = window.BRO_mobile;
+        }
+        console.log('------------- now !!! on mobile: ', mobileURI);
+        // window.location.href = mobileURI;
+    }
 
     // 跳转模块
     if (isJump) {
-        let mobileHref;
-        let jumpURI = 'mobile';
-        let endName = '';
-
-        if (window.browser_jumpto) {
-            jumpURI = window.browser_jumpto;
-        } else {
-            if (window.BROWSER_JUMPTO) {
-                jumpURI = window.BROWSER_JUMPTO;
-            }
-        }
-        console.log('isJump:', jumpURI);
-        if (jumpURI.lastIndexOf('.html') !== -1) {
-            jumpURI = jumpURI.replace('.html', '');
-            endName = 'l';
-        } else if (jumpURI.lastIndexOf('.htm') !== -1) {
-            jumpURI = jumpURI.replace('.htm', '');
-        }
-
-        if (href.lastIndexOf('index') !== -1) {
-            if (href.lastIndexOf('.html') !== -1) {
-                mobileHref = href.replace('index.html', jumpURI + '.html');
-            } else if (href.lastIndexOf('.htm') !== -1) {
-                mobileHref = href.replace('index.htm', jumpURI + '.htm');
-            } else {
-                mobileHref = href.replace('index', jumpURI);
-            }
-        } else {
-            mobileHref = `${href}${jumpURI}.htm${endName}`;
-        }
-        // 此时得到正确的 mobileHref
-        console.log('mobileHref:', mobileHref);
-
         // 判断 pad 或 phone
-        if (isMiPad || isMiBrowser || isIPad) {
-            // 如果是 pad
-            console.log('isPad');
-
-            // 是否开始pad跳转
-            const isJUMP_PAD = document.getElementsByName('BROWSER_JUMP_PAD').length > 0; // 默认：不开启
-            // console.log('isJUMP_PAD', isJUMP_PAD);
-            console.log('isJUMP_PAD:', isJUMP_PAD);
-
-            // 启用 pad跳转模块，默认不开启
-            const isMobilePage = href.lastIndexOf(jumpURI) > 0;
-            console.log('isMobile', isMobilePage);
-
-            if (!isMobilePage && isJUMP_PAD) {
-
-                let padHref;
-
-                // 处理 padHref
-                if (href.lastIndexOf('index') > 0 || href.lastIndexOf('mobile') > 0) {
-                    padHref = href.replace('index', 'pad');
-                    padHref = href.replace('mobile', 'pad');
-                } else {
-                    padHref = `${href}pad.htm`;
-                }
-                window.location.href = padHref;
-            }
-        } else {
-            if (isIPhone || isIPhoneOS || isAndroid || isWindowsMobile || isUCWeb) {
-                // 如果是 phone
-                console.log('isPhone');
-                if (!isMobilePage) {
-                    window.location.href = mobileHref;
-                }
-            } else {
-                if (isGecko && isKhtml && isFF && isV11) {
-                    // 如果是 otherMobile
-                    console.log('otherMobile');
-                    if (!isMobilePage) {
-                        window.location.href = mobileHref;
-                    }
-                }
-            }
+        if (hasJumpPad && (isMiPad || isMiBrowser || isIPad)) {
+            jumpToPad();
+        } else if (isIPhone || isIPhoneOS || isAndroid || isWindowsMobile || isUCWeb) {
+            jumpToMoblie();
         }
-        // }
+    } else if (hasJumpPad && (isMiPad || isMiBrowser || isIPad)) {
+        jumpToPad();
     }
 
-
-    // 设置 browser
     // 是否为 ie
     if (isMsie) {
         if (!isOpera) {
@@ -249,17 +187,18 @@
         if (isChrome) browser = chrome;
     }
 
-    // 设置 device
-    // if (isIPhone || isIPhoneOS) device = iphone;
-    // if (isIPad) device = ipad;
-    // if (isMacintosh) device = mac;
-    // if (isWindows) device = windows;
     if (browser === '') {
         browser = 'unknown';
     }
 
     // 验证 html.className 是否为空, 如果不为空则添加 ' ' 用来分割后面的 className
     console.log('html.className length:', html.className.length);
+    // 是否拥有 trim 方法
+    if (!String.prototype.trim) {
+        String.prototype.trim = function trim() {
+            return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+        };
+    }
 
     if (html.className.length > 0) {
         html.className = html.className.trim(); // 去除前后冗余空格
@@ -280,12 +219,12 @@
     html.className += `${device}`;
 
     // 输出 BROWSER 对象
-    window.BROWSER = {
+    window.BRO = {
         browser: browser,
         device: device.trim(),
-        version: version,
+        ver: version,
         ua: ua,
     };
 
     console.log('--------- browser.js well done!');
-})(window);
+})();

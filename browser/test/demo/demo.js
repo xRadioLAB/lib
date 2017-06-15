@@ -10,15 +10,15 @@
  * @(demo)Last modified time: 2016-08-29-04:52:40
  */
 // window.onload = function () {
-var browser = window.BROWSER;
+var browser = window.BRO;
 if (browser) {
     var htmlClass = document.getElementsByTagName('html')[0].getAttribute('class');
     document.getElementById('text').innerHTML =
         '<li><b>html class:</b>' + htmlClass + '</li>' +
         '<li><b>device: </b>' + browser.device + '</li>' +
         '<li><b>browser: </b>' + browser.browser + '</li>' +
-        '<li><b>version: </b>' + browser.version + '</li>' +
-        '<li><b>UA: </b>' + browser.UA + '</li>';
+        '<li><b>version: </b>' + browser.ver + '</li>' +
+        '<li><b>UA: </b><br>' + browser.ua + '</li>';
 
 }
 // };
