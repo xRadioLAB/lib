@@ -22,13 +22,15 @@ git clone https://github.com/xinhuaRadioLAB/lib.git
 2.  建议使用最新版本 **_lib_**
 3.  建议添加 `lib/` 至您的 `.gitignore`, **_lib_** 将不会上传至 git 服务器
 
-## 添加一个 lib 中的文件仓库提交至到 git 仓库的方法（非常暴力）
+## 添加一个 lib 中的文件仓库提交至到 git 仓库的方法
 
 例如添加 jq.js 
 
 ```shell
 git add -f lib/jq/jq.js
 ```
+
+这种方法非常暴力，不推荐使用 😓
 
 ## **_Tips_**
 
