@@ -16,29 +16,51 @@
 (function () {
     // 是否拥有 trim 方法
     if (!String.prototype.trim) {
-        String.prototype.trim = function () {
+        String.prototype.trim = function trim() {
             return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
         };
     }
 
+    // ------------------------------- begin
+    var browser = '';
+    var device = '';
+
+    var ua = navigator.userAgent.toLowerCase();
+    var href = window.location.href;
+    var html = document.getElementsByTagName('html')[0];
+    var version = (ua.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1];
+
     // 浏览器规则
-    var b = {
+    var _chrome$safari$firefo = {
+        chrome: 'chrome',
+        safari: 'safari',
+        firefox: 'firefox',
+        trident: 'trident',
+        opera: 'opera',
+        crios: 'crios',
         msie: 'msie',
         ie: 'ie',
         oldie: 'oldie',
         ie9: 'ie9',
         ie10: 'ie10',
-        ie11: 'ie11',
-        trident: 'trident',
-        chrome: 'chrome',
-        safari: 'safari',
-        firefox: 'firefox',
-        opera: 'opera',
-        crios: 'crios'
-    };
+        ie11: 'ie11'
+    },
+        chrome = _chrome$safari$firefo.chrome,
+        safari = _chrome$safari$firefo.safari,
+        firefox = _chrome$safari$firefo.firefox,
+        trident = _chrome$safari$firefo.trident,
+        opera = _chrome$safari$firefo.opera,
+        crios = _chrome$safari$firefo.crios,
+        msie = _chrome$safari$firefo.msie,
+        ie = _chrome$safari$firefo.ie,
+        oldie = _chrome$safari$firefo.oldie,
+        ie9 = _chrome$safari$firefo.ie9,
+        ie10 = _chrome$safari$firefo.ie10,
+        ie11 = _chrome$safari$firefo.ie11;
 
     // 设备规则
-    var d = {
+
+    var _ipad$iphone$iphoneOs = {
         ipad: 'ipad',
         iphone: 'iphone',
         iphoneOs: 'iphone os',
@@ -49,161 +71,159 @@
         mobile: 'mobile',
         otherMobile: 'OtherMobile',
         android: 'android'
-    };
+    },
+        ipad = _ipad$iphone$iphoneOs.ipad,
+        iphone = _ipad$iphone$iphoneOs.iphone,
+        iphoneOs = _ipad$iphone$iphoneOs.iphoneOs,
+        mac = _ipad$iphone$iphoneOs.mac,
+        macintosh = _ipad$iphone$iphoneOs.macintosh,
+        windows = _ipad$iphone$iphoneOs.windows,
+        pc = _ipad$iphone$iphoneOs.pc,
+        mobile = _ipad$iphone$iphoneOs.mobile,
+        otherMobile = _ipad$iphone$iphoneOs.otherMobile,
+        android = _ipad$iphone$iphoneOs.android;
+    var _isMacintosh$isIPad$i = {
+        isMacintosh: ua.indexOf(macintosh) > 0,
+        isIPad: ua.indexOf(ipad) > 0,
+        isIPhone: ua.indexOf(iphone) > 0,
+        isIPhoneOS: ua.indexOf(iphoneOs) > 0,
+        isAndroid: ua.indexOf(android) > 0,
+        isWindows: ua.indexOf(windows) > 0,
+        isWindowsMobile: ua.indexOf('windows mobile') > 0,
+        isEdge: ua.indexOf('edge') > 0,
+        isMiPad: ua.indexOf('mi pad') !== -1,
+        isMiBrowser: ua.indexOf('xiaomi/miuibrowser') !== -1,
+        isUCWeb: ua.indexOf(/ucweb/i) > 0,
+        isPCMod: href.lastIndexOf('#' + pc) !== -1,
+        isMsie: ua.indexOf(msie) > 0,
+        isTrident: ua.indexOf(trident) > 0,
+        isChrome: ua.indexOf(chrome) > 0 || ua.indexOf(crios) > 0,
+        isSafari: ua.indexOf(safari) > 0,
+        isFF: ua.indexOf(firefox) > 0,
+        isOpera: ua.indexOf(opera) > 0,
+        isGecko: ua.indexOf('gecko') > -1,
+        isKhtml: ua.indexOf('khtml') === -1,
+        isV11: version === '11.0'
+    },
+        isMacintosh = _isMacintosh$isIPad$i.isMacintosh,
+        isIPad = _isMacintosh$isIPad$i.isIPad,
+        isIPhone = _isMacintosh$isIPad$i.isIPhone,
+        isIPhoneOS = _isMacintosh$isIPad$i.isIPhoneOS,
+        isAndroid = _isMacintosh$isIPad$i.isAndroid,
+        isWindows = _isMacintosh$isIPad$i.isWindows,
+        isWindowsMobile = _isMacintosh$isIPad$i.isWindowsMobile,
+        isPCMod = _isMacintosh$isIPad$i.isPCMod,
+        isEdge = _isMacintosh$isIPad$i.isEdge,
+        isMiPad = _isMacintosh$isIPad$i.isMiPad,
+        isMiBrowser = _isMacintosh$isIPad$i.isMiBrowser,
+        isUCWeb = _isMacintosh$isIPad$i.isUCWeb,
+        isMsie = _isMacintosh$isIPad$i.isMsie,
+        isTrident = _isMacintosh$isIPad$i.isTrident,
+        isChrome = _isMacintosh$isIPad$i.isChrome,
+        isSafari = _isMacintosh$isIPad$i.isSafari,
+        isFF = _isMacintosh$isIPad$i.isFF,
+        isOpera = _isMacintosh$isIPad$i.isOpera,
+        isGecko = _isMacintosh$isIPad$i.isGecko,
+        isKhtml = _isMacintosh$isIPad$i.isKhtml,
+        isV11 = _isMacintosh$isIPad$i.isV11;
 
-    // 是否开启跳转
-    var BROWSER_NOJUMP = document.getElementById('BROWSER_NOJUMP');
-    // 添加 BROWSER_NOJUMP， 如果 window.BROWSER_NOJUMP = true; 则关闭跳转
-    var isJUMP = BROWSER_NOJUMP === null && !window.BROWSER_NOJUMP;
-    var JUMPTO_URL = 'mobile';
 
-    console.log('window.BROWSER_JUMPTO:', window.BROWSER_JUMPTO);
-
-    if (isJUMP && window.BROWSER_JUMPTO) {
-        JUMPTO_URL = window.BROWSER_JUMPTO;
-    }
-
-    console.log('JUMPTO_URL:', JUMPTO_URL);
-
-    console.log('isJUMP:', isJUMP);
-
-    // tag: html
-    var HTML = document.getElementsByTagName('html')[0];
-    // UA
-    var UA = navigator.userAgent.toLowerCase();
-    // href
-    var href = window.location.href;
-    // version
-    var version = (UA.match(/.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/) || [])[1];
-
-    // device
-    var device = '';
-    // apple
-    var isMacintosh = UA.indexOf(d.macintosh) > 0;
-    if (isMacintosh) device += ' ' + d.mac;
-    var isIPad = UA.indexOf(d.ipad) > 0;
-    if (isIPad) device += ' ' + d.ipad;
-    var isIPhone = UA.indexOf(d.iphone) > 0;
-    var isIPhoneOS = UA.indexOf(d.iphoneOs) > 0;
-    if (isIPhone || isIPhoneOS) device += ' ' + d.iphone;
-
-    // android
-    var isAndroid = UA.indexOf(d.android) > 0;
-    if (isAndroid) device += ' ' + d.android;
-    // console.log('aa device:', isAndroid);
-
-    // windows
-    var isWindows = UA.indexOf(d.windows) > 0;
-    if (isWindows) device += ' ' + d.windows;
-    var isWindowsMobile = UA.indexOf('windows mobile') > 0;
+    if (isMacintosh) device += ' ' + mac;
+    if (isIPad) device += ' ' + ipad;
+    if (isIPhone || isIPhoneOS) device += ' ' + iphone;
+    if (isAndroid) device += ' ' + android;
+    if (isWindows) device += ' ' + windows;
     if (isWindowsMobile) device += ' windowsMobile';
-    var isPCMod = href.lastIndexOf('#' + d.pc) !== -1;
-    if (isPCMod) device += ' ' + d.pc + 'Mod';
-    var isEdge = UA.indexOf('edge') > 0;
     if (isEdge) device += ' edge';
-
-    // miui
-    var isMiPad = UA.indexOf('mi pad') !== -1;
     if (isMiPad) device += ' miPad';
-    var isMiBrowser = UA.indexOf('xiaomi/miuibrowser') !== -1;
     if (isMiBrowser) device += ' xiaomi_miuibrowser';
-
-    // UC web
-    var isUCWeb = UA.indexOf(/ucweb/i) > 0;
     if (isUCWeb) device += ' ucweb';
+    if (isPCMod) device += ' ' + pc + 'Mod';
 
-    // browser
-    var browser = '';
-    var isMsie = UA.indexOf(b.msie) > 0;
-    var isTrident = UA.indexOf(b.trident) > 0;
-    var isChrome = UA.indexOf(b.chrome) > 0 || UA.indexOf(b.crios) > 0;
-    var isSafari = UA.indexOf(b.safari) > 0;
-    var isFF = UA.indexOf(b.firefox) > 0;
-    var isOpera = UA.indexOf(b.opera) > 0;
-    var isGecko = UA.indexOf('gecko') > -1;
-    var isKhtml = UA.indexOf('khtml') === -1;
-    var isV11 = version === '11.0';
+    var isJump = (typeof window.BROWSER_JUMPTO === 'string' || typeof window.browser_jumpto === 'string') && !isPCMod;
+
+    console.log('isJump0: ', isJump);
 
     // 跳转模块
-    if (isJUMP) {
-
+    if (isJump) {
         var mobileHref = void 0;
+        var jumpURI = 'mobile';
+        var endName = '';
 
-        console.log('JUMPTO_URL2:', JUMPTO_URL);
-
-        var isMobilePage = href.lastIndexOf(JUMPTO_URL) > 0;
-
-        console.log('isMobile', isMobilePage);
-
-        if (UA === null || UA === '' || isPCMod) {
-            console.log('isPCMod');
+        if (window.browser_jumpto) {
+            jumpURI = window.browser_jumpto;
         } else {
-            // 处理 mobileHref
-            // 处理 .html 和 .htm
-            var endName = '';
-            if (JUMPTO_URL.lastIndexOf('.html') !== -1) {
-                JUMPTO_URL = JUMPTO_URL.replace('.html', '');
-                endName = 'l';
-            } else if (JUMPTO_URL.lastIndexOf('.htm') !== -1) {
-                JUMPTO_URL = JUMPTO_URL.replace('.htm', '');
+            if (window.BROWSER_JUMPTO) {
+                jumpURI = window.BROWSER_JUMPTO;
             }
+        }
+        console.log('isJump:', jumpURI);
+        if (jumpURI.lastIndexOf('.html') !== -1) {
+            jumpURI = jumpURI.replace('.html', '');
+            endName = 'l';
+        } else if (jumpURI.lastIndexOf('.htm') !== -1) {
+            jumpURI = jumpURI.replace('.htm', '');
+        }
 
-            if (href.lastIndexOf('index') !== -1) {
-                if (href.lastIndexOf('.html') !== -1) {
-                    mobileHref = href.replace('index.html', JUMPTO_URL + '.html');
-                } else if (href.lastIndexOf('.htm') !== -1) {
-                    mobileHref = href.replace('index.htm', JUMPTO_URL + '.htm');
+        if (href.lastIndexOf('index') !== -1) {
+            if (href.lastIndexOf('.html') !== -1) {
+                mobileHref = href.replace('index.html', jumpURI + '.html');
+            } else if (href.lastIndexOf('.htm') !== -1) {
+                mobileHref = href.replace('index.htm', jumpURI + '.htm');
+            } else {
+                mobileHref = href.replace('index', jumpURI);
+            }
+        } else {
+            mobileHref = '' + href + jumpURI + '.htm' + endName;
+        }
+        // 此时得到正确的 mobileHref
+        console.log('mobileHref:', mobileHref);
+
+        // 判断 pad 或 phone
+        if (isMiPad || isMiBrowser || isIPad) {
+            // 如果是 pad
+            console.log('isPad');
+
+            // 是否开始pad跳转
+            var isJUMP_PAD = document.getElementsByName('BROWSER_JUMP_PAD').length > 0; // 默认：不开启
+            // console.log('isJUMP_PAD', isJUMP_PAD);
+            console.log('isJUMP_PAD:', isJUMP_PAD);
+
+            // 启用 pad跳转模块，默认不开启
+            var _isMobilePage = href.lastIndexOf(jumpURI) > 0;
+            console.log('isMobile', _isMobilePage);
+
+            if (!_isMobilePage && isJUMP_PAD) {
+
+                var padHref = void 0;
+
+                // 处理 padHref
+                if (href.lastIndexOf('index') > 0 || href.lastIndexOf('mobile') > 0) {
+                    padHref = href.replace('index', 'pad');
+                    padHref = href.replace('mobile', 'pad');
                 } else {
-                    mobileHref = href.replace('index', JUMPTO_URL);
+                    padHref = href + 'pad.htm';
                 }
-            } else {
-                mobileHref = '' + href + JUMPTO_URL + '.htm' + endName;
+                window.location.href = padHref;
             }
-            // 此时得到正确的 mobileHref
-            console.log('mobileHref:', mobileHref);
-
-            // 判断 pad 或 phone
-            if (isMiPad || isMiBrowser || isIPad) {
-                // 如果是 pad
-                console.log('isPad');
-
-                // 是否开始pad跳转
-                var isJUMP_PAD = document.getElementsByName('BROWSER_JUMP_PAD').length > 0; // 默认：不开启
-                // console.log('isJUMP_PAD', isJUMP_PAD);
-                console.log('isJUMP_PAD:', isJUMP_PAD);
-
-                // 启用 pad跳转模块，默认不开启
-                if (!isMobilePage && isJUMP_PAD) {
-
-                    var padHref = void 0;
-
-                    // 处理 padHref
-                    if (href.lastIndexOf('index') > 0 || href.lastIndexOf('mobile') > 0) {
-                        padHref = href.replace('index', 'pad');
-                        padHref = href.replace('mobile', 'pad');
-                    } else {
-                        padHref = href + 'pad.htm';
-                    }
-                    window.location.href = padHref;
+        } else {
+            if (isIPhone || isIPhoneOS || isAndroid || isWindowsMobile || isUCWeb) {
+                // 如果是 phone
+                console.log('isPhone');
+                if (!isMobilePage) {
+                    window.location.href = mobileHref;
                 }
             } else {
-                if (isIPhone || isIPhoneOS || isAndroid || isWindowsMobile || isUCWeb) {
-                    // 如果是 phone
-                    console.log('isPhone');
+                if (isGecko && isKhtml && isFF && isV11) {
+                    // 如果是 otherMobile
+                    console.log('otherMobile');
                     if (!isMobilePage) {
                         window.location.href = mobileHref;
-                    }
-                } else {
-                    if (isGecko && isKhtml && isFF && isV11) {
-                        // 如果是 otherMobile
-                        console.log('otherMobile');
-                        if (!isMobilePage) {
-                            window.location.href = mobileHref;
-                        }
                     }
                 }
             }
         }
+        // }
     }
 
     // 设置 browser
@@ -211,58 +231,58 @@
     if (isMsie) {
         if (!isOpera) {
             if (version < 9.0) {
-                browser = b.oldie;
+                browser = oldie;
             } else if (version < 10.0) {
-                browser = b.ie9;
+                browser = ie9;
             } else if (version < 11.0) {
-                browser = b.ie10;
+                browser = ie10;
             }
         }
     } else {
-        if (isTrident) browser = b.ie11;
-        if (isFF) browser = b.firefox;
-        if (isOpera) browser = b.opera;
-        if (isSafari) browser = b.safari;
-        if (isChrome) browser = b.chrome;
+        if (isTrident) browser = ie11;
+        if (isFF) browser = firefox;
+        if (isOpera) browser = opera;
+        if (isSafari) browser = safari;
+        if (isChrome) browser = chrome;
     }
 
     // 设置 device
-    // if (isIPhone || isIPhoneOS) device = d.iphone;
-    // if (isIPad) device = d.ipad;
-    // if (isMacintosh) device = d.mac;
-    // if (isWindows) device = d.windows;
+    // if (isIPhone || isIPhoneOS) device = iphone;
+    // if (isIPad) device = ipad;
+    // if (isMacintosh) device = mac;
+    // if (isWindows) device = windows;
     if (browser === '') {
         browser = 'unknown';
     }
 
-    // 验证 HTML.className 是否为空, 如果不为空则添加 ' ' 用来分割后面的 className
-    console.log('HTML.className.length:', HTML.className.length);
+    // 验证 html.className 是否为空, 如果不为空则添加 ' ' 用来分割后面的 className
+    console.log('html.className length:', html.className.length);
 
-    if (HTML.className.length > 0) {
-        HTML.className = HTML.className.trim(); // 去除前后冗余空格
-        HTML.className += ' ';
+    if (html.className.length > 0) {
+        html.className = html.className.trim(); // 去除前后冗余空格
+        html.className += ' ';
     }
 
     // 如果是ie 或者高版本ie（edge or ie11）
     if (isMsie || !isMsie && isTrident) {
-        HTML.className += b.ie + ' ' + browser;
+        html.className += ie + ' ' + browser;
     } else {
-        HTML.className += browser;
+        html.className += browser;
     }
 
     if (device === '') {
         device = ' unknown';
     }
 
-    HTML.className += '' + device;
+    html.className += '' + device;
 
     // 输出 BROWSER 对象
     window.BROWSER = {
         browser: browser,
         device: device.trim(),
         version: version,
-        UA: UA
+        ua: ua
     };
 
-    console.log('--- browser.js well done!');
-})();
+    console.log('--------- browser.js well done!');
+})(window);
