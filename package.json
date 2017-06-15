@@ -1,0 +1,9 @@
+{
+    "name": "lib",
+    "version": "0.1.62",
+    "description": "lib 是一个开发工具箱，她旨在帮助前端工程师快速启动项目开发，前端开发找来找去找代码的时代已经过去了！",
+    "main": "index.js",
+    "repository": "https://github.com/xinhuaRadioLAB/lib.git",
+    "author": "SuperMoo <st_sister@iCloud.com>",
+    "license": "MIT"
+}
