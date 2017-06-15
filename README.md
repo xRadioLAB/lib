@@ -4,17 +4,13 @@
 
 她旨在帮助前端工程师快速启动项目开发，
 
-她鲜美多汁，内容丰富,
+她鲜美多汁，内容丰富，开发部署找来找去，找代码的时代已经过去了！
 
-开发部署找来找去，找代码的时代已经过去了！
-
-## How to use
+## **_How to use_**
 
 ```shell
 git clone https://github.com/xinhuaRadioLAB/lib.git
 ```
-
-## **_How to use_**
 
 1.  详细阅读 **_README.md_** 和对应模块的 **_API_**
 2.  建议您 copy **_dist_** 中 **_.min_** 的压缩版本到您本地的开发文档 **_js_** 文件夹进行使用
