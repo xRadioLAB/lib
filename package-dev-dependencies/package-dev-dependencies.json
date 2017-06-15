@@ -1,13 +1,5 @@
 {
-    "name": "browser.js",
-    "version": "2.0.0",
-    "description": "browser.js",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/xinhuaRadioLAB/lib.git"
-    },
-    "author": "Super Woods",
-    "license": "MIT",
+    "version": "0.1.0",
     "devDependencies": {
         "browser-sync": "^2.18.8",
         "dateformat": "^2.0.0",

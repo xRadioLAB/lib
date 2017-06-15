@@ -178,6 +178,8 @@ var client = function(){
     system.wii = ua.indexOf("Wii") > -1;
     system.ps = /playstation/i.test(ua);
 
+    console.log(engine, browser, system);
+
     //return it
     return {
         engine:     engine,
