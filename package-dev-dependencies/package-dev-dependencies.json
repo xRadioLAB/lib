@@ -1,5 +1,12 @@
 {
-    "version": "0.1.0",
+    "version": "0.1.1",
+    "scripts": {
+        "dev": "gulp",
+        "build": "gulp build",
+        "start": "node ./bin/www",
+        "preserver": "rm -rf file-cms-template & rm -rf file-upload && mkdir -p file-cms-template & mkdir -p file-upload",
+        "server": "PORT=8888 npm start & wait\n# ---- dev server ----\n# 172.18.24.117:8888\n# localhost:8888"
+    },
     "devDependencies": {
         "browser-sync": "^2.18.8",
         "dateformat": "^2.0.0",
