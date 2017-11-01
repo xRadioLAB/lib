@@ -1,19 +1,6 @@
-/**
- * @Author: SuperMoo <SuperWoods>
- * @Date:   2017-05-15-16:08:47
- * @Email:  st_sister@me.com
- * @Filename: gulpfile.js
- * @Last modified by:   SuperWoods
- * @Last modified time: 2017-06-15-11:23:09
- * @License: MIT
- * @Copyright: Copyright (c) Xinhuanet Inc. All rights reserved.
- */
-
-// version 0.1.1
-
 const browsersync = require('browser-sync').create();
 const gulp = require('gulp');
-const jade = require('gulp-jade');
+const pug = require('gulp-pug');
 const autoprefixer = require('gulp-autoprefixer');
 const cleancss = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
@@ -34,17 +21,18 @@ const stripDebug = require('gulp-strip-debug');
 const getTime = (formats) => {
     const now = new Date();
     return dateFormat(now, formats);
-}
-const banner = [
-    '/**',
-    ` * Copyright (c) 2000 - ${getTime("yyyy")} XINHUANET.com All Rights Reserved.`,
-    ` * ${pkg.name} v${pkg.version}`,
-    ` * @time ${getTime("yyyy-mm-dd HH:MM:ss")}`,
-    ' */',
-    ''
-].join('\n');
+};
 
-gulp.task('browsersync', function() {
+const banner = `/**
+ * Copyright (c) 2000 - ${getTime("yyyy")} XINHUANET.com All Rights Reserved.
+ * ${pkg.name} v${pkg.version}
+ * @time ${getTime("yyyy-mm-dd HH:MM:ss")}
+ */
+`;
+const bannerCSS_charset_utf_8 = `@charset "utf-8";
+${banner}`;
+
+gulp.task('browsersync', function () {
     var files = [
         '*.htm',
         '*.html',
@@ -55,7 +43,7 @@ gulp.task('browsersync', function() {
         'bundle/*.png',
         'bundle/*.jpg',
         'bundle/*.gif',
-        'jade/*.jade',
+        'pug/*.pug',
     ];
     browsersync.init(files, {
         server: {
@@ -65,20 +53,20 @@ gulp.task('browsersync', function() {
     });
 });
 
-// jade
-gulp.task('jade', function() {
-    return gulp.src('jade/*.jade')
+// pug
+gulp.task('pug', function () {
+    return gulp.src('pug/*.pug')
         .pipe(plumber())
-        .pipe(jade({
+        .pipe(pug({
             pretty: true
         }))
         .pipe(gulp.dest('./'));
 });
 
-gulp.task('babel', function() {
+gulp.task('js', function () {
     return gulp.src([
-            'js/index.js',
-        ])
+        'js/pages.js',
+    ])
         .pipe(jsImport()) // jsImport
         .pipe(gulp.dest('import'))
         // .pipe(sourcemaps.init())
@@ -92,8 +80,11 @@ gulp.task('babel', function() {
         .pipe(gulp.dest('bundle'));
 });
 
-gulp.task('css', function() {
-    return gulp.src('css/index.css')
+gulp.task('css', function () {
+    return gulp.src([
+        'css/index.css',
+        'css/pages.css',
+    ])
         .pipe(postcss([
             atImport()
         ]))
@@ -105,14 +96,14 @@ gulp.task('css', function() {
 });
 
 // watch
-gulp.task('autowatch', function() {
-    gulp.watch('css/*.css', ['css']);
-    gulp.watch('js/*.js', ['babel']);
-    gulp.watch('jade/*.jade', ['jade']);
+gulp.task('autowatch', function () {
+    gulp.watch('pug/*.pug', ['pug']);
+    // gulp.watch('js/*.js', ['js']);
+    // gulp.watch('css/*.css', ['css']);
 });
 
-// --------------------------------------------------------------- 生产模式压缩输出
-gulp.task('indexMinCSS', function() {
+// built
+gulp.task('builtCSS', function () {
     gulp.src('bundle/index.css')
         .pipe(rename('index.min.css'))
         .pipe(cleancss({
@@ -122,60 +113,32 @@ gulp.task('indexMinCSS', function() {
             keepSpecialComments: '*'
             //保留所有特殊前缀 当你用autoprefixer生成的浏览器前缀，如果不加这个参数，有可能将会删除你的部分前缀
         }))
-        .pipe(header(banner, {
-            pkg: pkg
-        }))
+        .pipe(header(bannerCSS_charset_utf_8))
+        // .pipe(header(banner))
         .pipe(gulp.dest('bundle'));
 });
 
-gulp.task('indexAllMinJS', function() {
-    gulp.src([
-            // 'bundle/swiper.min.js',
-            // 'bundle/jquery.qrcode.min.js',
-            // 'bundle/jquery.jplayer.min.js',
-            // 'bundle/jquery.jplayer.playlist.mobile.js',
-            'bundle/index.js',
-        ])
-        .pipe(concat('index.all.js')) //合并后的文件名
-        .pipe(gulp.dest('bundle'))
+gulp.task('builtJS', function () {
+    gulp.src(['bundle/index.js'])
+        // .pipe(concat('index.min.js')) //合并后的文件名
+        // .pipe(gulp.dest('bundle'))
         .pipe(stripDebug()) // 删除 console
-        .pipe(rename('index.all.min.js'))
+        .pipe(rename('index.min.js'))
         // .pipe(sourcemaps.init())
         .pipe(uglify())
         // .pipe(sourcemaps.write('../maps'))
-        .pipe(header(banner, {
-            pkg: pkg
-        }))
+        .pipe(header(banner))
         .pipe(gulp.dest('bundle'));
 });
 
-// gulp.task('single', function() {
-//     gulp.src([
-//             'bundle/name.js',
-//             // 'bundle/name1.min.js',
-//         ])
-//         // .pipe(concat('name.all.js')) //合并后的文件名
-//         // .pipe(gulp.dest('bundle'))
-//         .pipe(stripDebug()) // 删除 console
-//         .pipe(rename('name.min.js'))
-//         // .pipe(sourcemaps.init())
-//         .pipe(uglify())
-//         // .pipe(sourcemaps.write('../maps'))
-//         .pipe(header(banner, {
-//             pkg: pkg
-//         }))
-//         .pipe(gulp.dest('bundle'));
-// });
-
-// ------------------------------------------------------------------------ 命令
-// 开发模式 gulp
+// gulp
 gulp.task('default', [
     'autowatch',
     'browsersync'
 ]);
 
-// 生产模式 gulp build
+// build
 gulp.task('build', [
-    'indexMinCSS',
-    'indexAllMinJS',
+    'builtCSS',
+    'builtJS',
 ]);
