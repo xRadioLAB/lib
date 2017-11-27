@@ -1,0 +1,230 @@
+- const title = '新华网'
+- const keywords = title
+- const description = title
+
+doctype
+html
+    head
+        meta(charset="utf-8")
+        meta(http-equiv="X-UA-Compatible" content="chrome")
+        meta(name="renderer" content="webkit")
+        title= title + '_新华网'
+        meta(name="keywords" content= keywords)
+        meta(name="description" content= "" + description)
+        meta(name="apple-mobile-web-app-title" content=title)
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+
+        script(src="bundle/browser.min.js")
+        script
+            | var browser = window.BRO, 
+            | isAboveIE9 = browser && ("oldie" !== browser.browser && "ie9" !== browser.browser);
+
+        <!-- build:css bundle/index.min.css -->
+        link(rel="stylesheet" href="bundle/index.css")
+        <!-- endbuild -->
+
+    body
+        include mod-nav
+        
+        .area.area-banner
+            a(href="http://uav.xinhuanet.com/wlstdh/")
+                .area-banner-img
+                    img(src="bundle/banner.jpg" width="1920" height="475")
+        .main
+            .container.container1
+                .swiper-container.rot1#rot1
+                    .swiper-wrapper(data-img="大图")
+                        each item in [0, 1, 2, 3]
+                            .swiper-slide
+                                a(href="#")
+                                    img.transition(src="demo/del2.png")
+                                    .swiper-title
+                                        .swiper-text= item + "这是一个swiper循环块"
+                .right
+                    .col-box
+                        //- a(href="#")
+                        .col1.sprite.sprite-col1
+                            .sprite.sprite-toutiao
+                                h2.hide 头条
+
+                    div(data-title="聚焦")
+                        //- h2.big-title
+                        //-     a(href="#") 刘宏伟获评2016中国网络视听“年度内容创新人物”
+                        //- .abs 会上揭晓了2016年网络视听年度人物，新华网融媒体产品创新中心总经理兼无人机事业部总经理刘宏伟荣膺年度人物，被评为年度内容创新人物。
+
+                    ul.list(data-list="聚焦")
+                        //- each item in [0, 1, 2, 3]
+                        //-     li
+                        //-         a(href="#")= item + "中国网络视听大会永久落户成都 第四届大会明日启动"
+
+            .container.container2.sprite.sprite-col2-bg
+                a(href="jsbb.html")
+                    .col2.left.sprite.sprite-col2
+                        .sprite.sprite-jishibobao
+                            h2.hide 即时播报
+
+                .swiper-container.right.text-swiper#text-swiper
+                    .swiper-wrapper(data-list="即时播报")
+                        //- each item in [0, 1, 2, 3, 4, 5, 6]
+                        //-     .swiper-slide
+                        //-         a(href="#")
+                        //-             .swiper-title= item + "一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十"
+
+            div(data-list="通栏广告")
+                //- .container.container-ad
+                //-     img(src="demo/del-ad1.png")
+
+            .container.container4
+                //- a(href="#")
+                .col3
+                    .col3-title.sprite.sprite-jicaishipin
+                        h2.hide 精彩视频
+                    .col3-left.sprite.sprite-col3-left
+                    .col3-right.sprite.sprite-col3-right
+            
+                .swiper-container.pic-swiper.has-video-btn#pic-swiper
+                    .swiper-wrapper(data-img="精彩视频")
+                        //- each item in [0, 1, 2, 3, 4, 5, 6]
+                        //-     .swiper-slide
+                        //-         a(href="#")
+                        //-             .pic-swiper-btn-box
+                        //-                 img.transition(src="demo/del2.png")
+                        //-             .swiper-title= item + "鸟瞰西藏朗秋 醉听藏歌“绕梁”"
+
+            .container.container5
+                .calendar#calendar
+                    //- .col-box
+                    //-     //- a(href="#")
+                    //-     .col-icon.sprite.sprite-richenganpai
+                    //-         h2.hide 日程安排
+                    //-     .col-data
+                    //-         span.active 11月29日
+                            
+                    //- .calendar-list
+                    //-     .row
+                    //-         .row-in
+                    //-             .day 09:00-19:00
+                    //-             .text 会议注册
+                    //-     .row.row-title.sprite.sprite-orange-bg 高峰会议
+                    //-     .row
+                    //-         .row-in
+                    //-             .day 14:00-17:30   
+                    //-             .text 无人机产业峰会暨"瞰天下"航拍创作分享会
+                    //-     .row.row-title.sprite.sprite-orange-bg 专业论坛
+                    //-     .row
+                    //-         .row-in
+                    //-             .day 09:00-12:00
+                    //-             .text 2017成都高新区数字视听产业论坛
+                    //-         .row-in
+                    //-             .day &nbsp;
+                    //-             .text 2017 城市台地面电视联盟年会暨城市台长论坛（上）
+                    //-         .row-in 
+                    //-             .day 14:00-17:30
+                    //-             .text 精品网络视听内容创作研修会
+                    //-         .row-in
+                    //-             .day &nbsp;
+                    //-             .text 国创动漫高峰论坛:网络视听新势力
+
+                .qrcode#qrcode(data-list="二维码")
+                    //- .row
+                    //-     a(href="#111" title="扫描二维码")
+                    //-         //- .qrcode-img
+                    //-         .qrcode-title 扫码分享扫码分享扫码分享扫码分享扫码分享扫码分享
+                    //- .row
+                    //-     a(href="#222" title="扫描二维码")
+                    //-         //- .qrcode-img
+                    //-         .qrcode-title 扫码分享扫码分享扫码分享扫码分享扫码分享扫码分享
+
+            .container.container6
+                //- a(href="#")
+                .col3
+                    .col3-title.sprite.sprite-gaoqingtupian
+                        h2.hide 高清图片
+                    .col3-left.sprite.sprite-col3-left
+                    .col3-right.sprite.sprite-col3-right
+            
+                .swiper-container.pic-swiper#pic-swiper2
+                    .swiper-wrapper(data-img="高清图片")
+                        //- each item in [0, 1, 2, 3, 4, 5, 6]
+                        //-     .swiper-slide
+                        //-         a(href="#")
+                        //-             .pic-swiper-btn-box
+                        //-                 img.transition(src="demo/del2.png")
+                        //-             .swiper-title= item + "鸟瞰西藏朗秋 醉听藏歌“绕梁”"
+
+            div(data-list="通栏广告")
+
+            .container.container7
+                .container-in.clearfix
+                    .col-box.sprite.sprite-bg-orange
+                        //- a(href="#")
+                        h2.col-title 大咖说
+                        ul.list(data-list="大咖说")
+                            //- each item in [0, 1, 2, 3]
+                            //-     li
+                            //-         a(href="#")= item + "中国网络视听大会永久落户成都 第四届大会明日启动"
+
+                    .col-box.sprite.sprite-bg-bule
+                        //- a(href="#")
+                        h2.col-title 行业
+                        ul.list(data-list="行业")
+                            //- each item in [0, 1, 2, 3]
+                            //-     li
+                            //-         a(href="#")= item + "中国网络视听大会永久落户成都 第四届大会明日启动"
+
+                    .col-box.sprite.sprite-bg-purple
+                        //- a(href="#")
+                        h2.col-title 资讯
+                        ul.list(data-list="资讯")
+                            //- each item in [0, 1, 2, 3]
+                            //-     li
+                            //-         a(href="#")= item + "中国网络视听大会永久落户成都 第四届大会明日启动"
+
+                    .col-box.sprite.sprite-bg-red
+                        //- a(href="#")
+                        h2.col-title 技术
+                        ul.list(data-list="技术")
+                            //- each item in [0, 1, 2, 3]
+                            //-     li
+                            //-         a(href="#")= item + "中国网络视听大会永久落户成都 第四届大会明日启动"
+
+            .container.container8
+                //- a(href="#")
+                h2.col-title 合作机构
+
+                .contnet(data-list="合作机构")
+                    //- a(href="#")
+                    //-     img(src="demo/del3.png")
+                    //- a(href="#")
+                    //-     img(src="demo/del4.png")
+                    //- a(href="#")
+                    //-     img(src="demo/del5.png")
+
+        .container.container-pages
+            .left
+                .bread#bread
+                    //- .bread-t 当前位置：
+                    //- .bread-c 
+                    //-     a(href="#") 新华网网络视听大会 
+                    //-     | > 
+                    //-     a(href="#").active  即时播报 
+
+                .sprite.sprite-col2-bg
+                    .col2.left.sprite.sprite-col2#page-col-title
+                        //- .sprite.sprite-jishibobao
+                            //- h2.hide 即时播报
+                    //- .back-home
+                    //-     a(href="#" target="_self") << 返回首页 
+                ul.list
+                    //- each item in [0, 1, 2, 3]
+                    //-     li
+                    //-         a(href="#")= item + "中国网络视听大会永久落户成都 第四届大会明日启动"
+            .right#pages-right
+
+        <!-- build:js bundle/index.min.js -->
+        script(src="bundle/jq.js")
+        <!-- endbuild -->
+        
+        <!-- build:js bundle/index.min.js -->
+        script(src="bundle/index.js")
+        <!-- endbuild -->
