@@ -45,3 +45,5 @@ jspm_packages
 local/
 sundries/
 import/
+
+jQuery-slimScroll/
