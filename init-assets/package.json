@@ -7,7 +7,7 @@
     "author": "SuperMoo <st_sister@me.com>",
     "license": "MIT",
     "scripts": {
-        "init-lib": "git clone https://github.com/xinhuaRadioLAB/lib.git",
+        "init-all": "git clone https://github.com/xinhuaRadioLAB/lib.git",
         "start": "yarn dev & yarn styl",
         "watch": "webpack --watch",
         "dev": "gulp",
