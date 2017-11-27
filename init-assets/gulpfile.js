@@ -1,5 +1,6 @@
 const browsersync = require('browser-sync').create();
 const gulp = require('gulp');
+const del = require('del');
 const pug = require('gulp-pug');
 const autoprefixer = require('gulp-autoprefixer');
 const cleancss = require('gulp-clean-css');
@@ -17,6 +18,7 @@ const header = require('gulp-header');
 const dateFormat = require('dateformat');
 const pkg = require('./package.json');
 const stripDebug = require('gulp-strip-debug');
+const usemin = require('gulp-usemin');
 
 const getTime = (formats) => {
     const now = new Date();
@@ -31,6 +33,56 @@ const banner = `/**
 `;
 const bannerCSS_charset_utf_8 = `@charset "utf-8";
 ${banner}`;
+
+const copyFn = function () {
+    gulp.src('dist/index.html')
+        .pipe(rename('pages.html'))
+        .pipe(gulp.dest('dist'));
+
+    gulp.src('dist/index.html')
+        .pipe(rename('index.htm'))
+        .pipe(gulp.dest('dist'));
+
+    gulp.src('dist/pages.html')
+        .pipe(rename('pages.htm'))
+        .pipe(gulp.dest('dist'));
+
+    gulp.src('dist/index.html')
+        .pipe(rename('pages.html'))
+        .pipe(gulp.dest('./'));
+
+    setTimeout(function () {
+        del(['dist/bundle/']);
+    }, 2000);
+};
+
+gulp.task('usemin', function () {
+    gulp.src('./index.html')
+        .pipe(usemin(
+            {
+                // js: [],
+                // css: [],
+                // css: [rev],
+                // html: [function () { return htmlmin({ collapseWhitespace: true }); }],
+                // js: [uglify, rev],
+                // inlinejs: [uglify],
+                // inlinecss: [cleanCss, 'concat']
+            }
+        ))
+        .pipe(gulp.dest('dist'));
+
+    // copyFn();
+});
+
+gulp.task('clean', function (cb) {
+    del([
+        'dist/bundle/',
+        // 这里我们使用一个通配模式来匹配 `mobile` 文件夹中的所有东西
+        // 'dist/mobile/**/*',
+        // 我们不希望删掉这个文件，所以我们取反这个匹配模式
+        // '!dist/mobile/deploy.json'
+    ], cb);
+});
 
 gulp.task('browsersync', function () {
     var files = [
@@ -65,7 +117,7 @@ gulp.task('pug', function () {
 
 gulp.task('js', function () {
     return gulp.src([
-        'js/pages.js',
+        'js/index.js',
     ])
         .pipe(jsImport()) // jsImport
         .pipe(gulp.dest('import'))
@@ -83,7 +135,7 @@ gulp.task('js', function () {
 gulp.task('css', function () {
     return gulp.src([
         'css/index.css',
-        'css/pages.css',
+        // 'css/pages.css',
     ])
         .pipe(postcss([
             atImport()
@@ -98,7 +150,7 @@ gulp.task('css', function () {
 // watch
 gulp.task('autowatch', function () {
     gulp.watch('pug/*.pug', ['pug']);
-    // gulp.watch('js/*.js', ['js']);
+    gulp.watch('js/*.js', ['js']);
     // gulp.watch('css/*.css', ['css']);
 });
 

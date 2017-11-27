@@ -1,0 +1,259 @@
+
+light-blue = #60ADF0
+
+color-link()
+    color: #333
+
+color-hover()
+    color: light-blue
+
+pseudo-classes-base()
+    content: ''
+    overflow: hidden
+
+set-top(l, d)
+    top: ((l - d) / 2)
+
+img-bg()
+    display: flex
+    justify-content: center
+    flex-direction: column
+    background-color: #2baee5
+    background-image: url(./img-bg.png)
+    background-position: center center
+    background-size: cover
+
+@import './swiper'
+@import "./hack-tips"
+
+body,
+html 
+    width: 100%
+
+body
+    font-family: "PingFang SC", "Lantinghei SC", "Helvetica Neue", Helvetica, Arial, sans-serif
+    
+.ie
+    body,
+    td,
+    th
+        font-family: "PingFang SC", "Lantinghei SC", "Helvetica Neue", Helvetica, Arial, "Microsoft YaHei", "微软雅黑", STHeitiSC-Light, simsun, "宋体", "WenQuanYi Zen Hei", "WenQuanYi Micro Hei", sans-serif
+
+body,
+ul,
+li,
+h1,
+h2,
+p
+    padding: 0
+    margin: 0
+
+ul,
+li
+    list-style: none
+
+a
+    color-link()
+    text-decoration: none
+    
+    &:hover
+        color-hover()
+
+.left
+    float: left
+
+.right
+    float: right
+
+// .sprite:after,
+// .row:after,
+.container:after,
+.clearfix:after,
+.wrap:after
+    display: block
+    content: ''
+    clear: both
+    width: 100%
+    overflow: hidden
+    height: 0
+
+.hide
+    display: none
+
+// ----------------------- footer
+.footer,
+.footer a
+    color: #FFF
+
+.footer a:hover
+    color-hover()
+
+.footer
+    margin: 0 auto
+    line-height: 25px
+    width: 100%
+    font-size: 12px
+    padding: 20px 0
+    text-align: center
+    background-color: #565656
+
+.transition
+    transition: all 1s //ease-in-out
+    s = 0.2
+    a:hover &
+        transform: scale(1+s)
+        transform: translate(-s, -s)
+
+.container
+    width: 1200px
+    height: auto
+    margin: 0 auto
+
+.list
+    li
+        h = 37px
+        line-height: h
+        font-size: 18px
+        position: relative
+        padding-left: 16px
+
+        &:before
+            pseudo-classes-base()
+            display: block
+            width: 5px
+            height: 5px
+            background: #333
+            position: absolute
+            left: 0
+            set-top(h, @height)
+            // top: ((h - @height) / 2)
+            // margin-top: -(@height / 2)     
+.abs
+    font-size: 16px
+    line-height: 23px
+
+
+widthMax = 1920px
+
+.area
+    width: 100%
+    position: relative
+    overflow: hidden
+
+// ----------------------- hey wo go! 
+
+bannerHeight = 475px
+
+.area-banner
+    height: bannerHeight
+
+.area-banner-img
+    width: widthMax
+    height: bannerHeight
+    position: absolute
+    top: 0
+    left: 50%
+    margin-left: -(widthMax * 0.5)
+
+.big-title
+    font-size: 20px
+    color-link()
+    font-weight: bold
+    line-height: 60px
+
+
+rotWidth = 699px
+rotHeight = 400px
+
+.rot1
+    width: rotWidth
+    height: rotHeight
+
+    img
+        width: rotWidth
+        height: rotHeight
+    
+    .swiper-wrapper
+        z-index: 3
+
+    .swiper-title
+        width: 100%
+        position: absolute
+        left: 0
+        bottom: 0 
+        z-index: 2
+        img-bg()
+
+        & .swiper-text
+            color: #ffffff
+            font-size: 18px
+        
+        & .swiper-text
+            padding: 15px 20px
+            position: absolute
+            z-index: 3
+            bottom: 0
+            left: 0
+            text-shadow: 0 2px 2px rgba(#000, 0.3)
+
+        &:after
+            pseudo-classes-base()
+            background-color: rgba(#000, 0.6)
+            position: absolute
+            z-index: 2
+            display: block
+            height: 56px
+            width: 100%
+            left: 0
+            bottom: 0
+
+    & .swiper-pagination
+        width: auto
+        left: auto
+        right: 0
+        padding-right: 10px
+        bottom: 19px
+
+        & .swiper-pagination-bullet
+            background-color: #FFF
+            opacity: 0.6
+            
+        & .swiper-pagination-bullet-active
+            background-color: #FFF
+            opacity: 1
+            
+    a:hover .swiper-text
+        color-hover()
+
+
+.container1
+    margin-top: 30px
+
+    & .left
+        width: rotWidth
+
+    & .right
+        width: 485px
+        
+        .big-title,
+        .list
+            padding-left: 19px
+        
+        .big-title
+            margin-top: 10px
+        
+        .abs
+            margin-left: 19px
+            padding-bottom: 20px
+            margin-bottom: 18px
+            border-bottom: #d9d9d9 1px dashed
+
+        .col-box
+            width: 100%
+            display: block
+            border-bottom: #d9d9d9 1px solid
+            padding-bottom: 12px
+            margin-top: 8px
+
+// mobile
+@import "./mobile"
