@@ -18,7 +18,15 @@ if (browser) {
         '<li><b>device: </b>' + browser.device + '</li>' +
         '<li><b>browser: </b>' + browser.browser + '</li>' +
         '<li><b>version: </b>' + browser.ver + '</li>' +
-        '<li><b>UA: </b><br>' + browser.ua + '</li>';
+        '<li><b>UA: </b><br>' + browser.ua + '</li>' +
+        '<li><b>isAboveIE9: </b>' + browser.isAboveIE9 + '</li>' +
+        '<li><b>isDev: </b>' + browser.isDev + '</li>' +
+        '<li><b>isPc: </b>' + browser.isPc + '</li>';
 
+
+    console.log('BRO: ', BRO);
+    console.log('isAboveIE9: ', isAboveIE9);
+    console.log('isDev: ', isDev);
+    console.log('isPc: ', isPc);
 }
 // };

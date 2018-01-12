@@ -209,14 +209,33 @@
     }
 
     html.className += '' + device;
+    device = device.trim();
+
+    // add3个布尔验证 v2.3.0
+    var isDevFn = function isDevFn(href) {
+        return href && (/dev/.test(href) || /localhost/.test(href));
+    };
+    var isPcFn = function isPcFn(device) {
+        return device === 'mac' || device === 'windows';
+    };
+
+    var isAboveIE9 = browser && "oldie" !== browser && "ie9" !== browser;
+    var isDev = isDevFn(href);
+    var isPc = isPcFn(device);
 
     // 输出 BROWSER 对象
     window.BRO = {
         browser: browser,
-        device: device.trim(),
+        device: device,
         ver: version,
-        ua: ua
+        ua: ua,
+        isAboveIE9: isAboveIE9,
+        isDev: isDev,
+        isPc: isPc
     };
+    window.isAboveIE9 = isAboveIE9;
+    window.isDev = isDev;
+    window.isPc = isPc;
 
     console.log('---------------------------\n> browser.js done!', BRO);
 })();
