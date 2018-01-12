@@ -8,6 +8,9 @@ const lib = 📦 => { ⚙️🔩✂️🛠🗜⚗️🔬⚖️ } // 前端开发
 - 她鲜美多汁，内容丰富
 - 开发部署找来找去，找代码的时代已经过去了！
 
+## browser.js
+
+https://xinhuaradiolab.github.io/lib/browser/
 
 ## **_How to use_**
 
