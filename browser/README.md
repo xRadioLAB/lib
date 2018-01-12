@@ -1,6 +1,6 @@
 # **browser.js**
 
-demo: <https://xinhuaradiolab.github.io/lib/browser/test/online.html>
+demo: <https://xinhuaradiolab.github.io/lib/browser/>
 
 ## _**Introduction**_
 
