@@ -13,7 +13,7 @@
 
 const browsersync = require('browser-sync').create();
 const gulp = require('gulp');
-const jade = require('gulp-jade');
+const pug = require('gulp-pug');
 const autoprefixer = require('gulp-autoprefixer');
 const cleancss = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
@@ -44,7 +44,7 @@ const banner = [
     ''
 ].join('\n');
 
-gulp.task('browsersync', function() {
+gulp.task('browsersync', function () {
     var files = [
         '*.htm',
         '*.html',
@@ -59,10 +59,10 @@ gulp.task('browsersync', function() {
     });
 });
 
-gulp.task('babel', function() {
+gulp.task('babel', function () {
     return gulp.src([
-            'js/browser.js',
-        ])
+        'js/browser.js',
+    ])
         .pipe(jsImport()) // jsImport
         .pipe(gulp.dest('import'))
         // .pipe(sourcemaps.init())
@@ -70,21 +70,21 @@ gulp.task('babel', function() {
             errorHandler: notify.onError('Error: <%= error.message %>')
         })) //错误处理
         .pipe(babel({
-            presets: ['es2015']
+            presets: ['env']
         }))
         // .pipe(sourcemaps.write('../maps'))
         .pipe(gulp.dest('bundle'));
 });
 
 // watch
-gulp.task('autowatch', function() {
+gulp.task('autowatch', function () {
     gulp.watch('js/*.js', ['babel']);
 });
 
-gulp.task('buildJS', function() {
+gulp.task('buildJS', function () {
     gulp.src([
-            'bundle/browser.js',
-        ])
+        'bundle/browser.js',
+    ])
         // .pipe(concat('browser.all.js')) //合并后的文件名
         // .pipe(gulp.dest('bundle'))
         .pipe(stripDebug()) // 删除 console

@@ -46,30 +46,30 @@
         otherMobile,
         android,
     } = {
-        chrome: 'chrome',
-        safari: 'safari',
-        firefox: 'firefox',
-        trident: 'trident',
-        opera: 'opera',
-        crios: 'crios',
-        msie: 'msie',
-        ie: 'ie',
-        oldie: 'oldie',
-        ie9: 'ie9',
-        ie10: 'ie10',
-        ie11: 'ie11',
-        // 设备规则
-        ipad: 'ipad',
-        iphone: 'iphone',
-        iphoneOs: 'iphone os',
-        mac: 'mac',
-        macintosh: 'macintosh',
-        windows: 'windows',
-        pc: 'pc',
-        mobile: 'mobile',
-        otherMobile: 'OtherMobile',
-        android: 'android',
-    };
+            chrome: 'chrome',
+            safari: 'safari',
+            firefox: 'firefox',
+            trident: 'trident',
+            opera: 'opera',
+            crios: 'crios',
+            msie: 'msie',
+            ie: 'ie',
+            oldie: 'oldie',
+            ie9: 'ie9',
+            ie10: 'ie10',
+            ie11: 'ie11',
+            // 设备规则
+            ipad: 'ipad',
+            iphone: 'iphone',
+            iphoneOs: 'iphone os',
+            mac: 'mac',
+            macintosh: 'macintosh',
+            windows: 'windows',
+            pc: 'pc',
+            mobile: 'mobile',
+            otherMobile: 'OtherMobile',
+            android: 'android',
+        };
 
     const {
         isMacintosh,
@@ -94,28 +94,28 @@
         isKhtml,
         isV11,
     } = {
-        isMacintosh: ua.indexOf(macintosh) > 0,
-        isIPad: ua.indexOf(ipad) > 0,
-        isIPhone: ua.indexOf(iphone) > 0,
-        isIPhoneOS: ua.indexOf(iphoneOs) > 0,
-        isAndroid: ua.indexOf(android) > 0,
-        isWindows: ua.indexOf(windows) > 0,
-        isWindowsMobile: ua.indexOf('windows mobile') > 0,
-        isEdge: ua.indexOf('edge') > 0,
-        isMiPad: ua.indexOf('mi pad') !== -1,
-        isMiBrowser: ua.indexOf('xiaomi/miuibrowser') !== -1,
-        isUCWeb: ua.indexOf(/ucweb/i) > 0,
-        isPCMod: href.lastIndexOf(`#${pc}`) !== -1,
-        isMsie: ua.indexOf(msie) > 0,
-        isTrident: ua.indexOf(trident) > 0,
-        isChrome: ua.indexOf(chrome) > 0 || ua.indexOf(crios) > 0,
-        isSafari: ua.indexOf(safari) > 0,
-        isFF: ua.indexOf(firefox) > 0,
-        isOpera: ua.indexOf(opera) > 0,
-        isGecko: ua.indexOf('gecko') > -1,
-        isKhtml: ua.indexOf('khtml') === -1,
-        isV11: version === '11.0',
-    };
+            isMacintosh: ua.indexOf(macintosh) > 0,
+            isIPad: ua.indexOf(ipad) > 0,
+            isIPhone: ua.indexOf(iphone) > 0,
+            isIPhoneOS: ua.indexOf(iphoneOs) > 0,
+            isAndroid: ua.indexOf(android) > 0,
+            isWindows: ua.indexOf(windows) > 0,
+            isWindowsMobile: ua.indexOf('windows mobile') > 0,
+            isEdge: ua.indexOf('edge') > 0,
+            isMiPad: ua.indexOf('mi pad') !== -1,
+            isMiBrowser: ua.indexOf('xiaomi/miuibrowser') !== -1,
+            isUCWeb: ua.indexOf(/ucweb/i) > 0,
+            isPCMod: href.lastIndexOf(`#${pc}`) !== -1,
+            isMsie: ua.indexOf(msie) > 0,
+            isTrident: ua.indexOf(trident) > 0,
+            isChrome: ua.indexOf(chrome) > 0 || ua.indexOf(crios) > 0,
+            isSafari: ua.indexOf(safari) > 0,
+            isFF: ua.indexOf(firefox) > 0,
+            isOpera: ua.indexOf(opera) > 0,
+            isGecko: ua.indexOf('gecko') > -1,
+            isKhtml: ua.indexOf('khtml') === -1,
+            isV11: version === '11.0',
+        };
 
     if (isMacintosh) device += ` ${mac}`;
     if (isIPad) device += ` ${ipad}`;
@@ -209,14 +209,30 @@
     }
 
     html.className += `${device}`;
+    device = device.trim();
+
+    // add3个布尔验证 v2.3.0
+    @import './is-dev.js'
+    @import './is-pc.js'
+
+    const isAboveIE9 = browser && ("oldie" !== browser && "ie9" !== browser);
+    const isDev = isDevFn(href);
+    const isPc = isPcFn(device);
 
     // 输出 BROWSER 对象
     window.BRO = {
         browser: browser,
-        device: device.trim(),
+        device: device,
         ver: version,
         ua: ua,
+        isAboveIE9: isAboveIE9,
+        isDev: isDev,
+        isPc: isPc,
     };
+    window.isAboveIE9 = isAboveIE9;
+    window.isDev = isDev;
+    window.isPc = isPc;
+
 
     console.log('---------------------------\n> browser.js done!', BRO);
 })();

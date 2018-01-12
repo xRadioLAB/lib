@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class=" test testRedundancyBlanks ">
 
 <head>
     <meta charset="utf-8">
@@ -7,19 +7,26 @@
     <meta name="renderer" content="webkit">
     <meta content="width=device-width,initial-scale=1" name="viewport">
     <title>browser.js</title>
+    <!-- browser.js 自定义配置：必须放在browser.js之前 -->
     <script>
         // var BRO_pad = '/test/pad.htm';
         // var BRO_mobile = '/test/mobile.htm';
     </script>
-    <script src="https://xinhuaradiolab.github.io/lib/browser/bundle/browser.min.js"></script>
-    <link rel="stylesheet" href="demo/demo.css">
+    <script src="/bundle/browser.min.js"></script>
+    <!-- <script src="http://localhost:3000/bundle/browser.js"></script> -->
 
+
+
+    <link rel="stylesheet" href="demo/demo.css">
 </head>
 
 <body>
     <h1>browser.js</h1>
     <ul id="text"> </ul>
-    <hr> <a href="https://github.com/xinhuaRadioLAB/lib/tree/master/browser#browserjs">github browser.js</a>
+    <hr> <a href="index.html">index.htm</a>
+    <br> <a href="index.html#pc">index.htm#pc</a>
+
+
     <script src="demo/demo.js"></script>
 </body>
 
