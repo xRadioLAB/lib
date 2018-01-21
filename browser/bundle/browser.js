@@ -216,7 +216,9 @@
         return href && (/dev/.test(href) || /localhost/.test(href));
     };
     var isPcFn = function isPcFn(device) {
-        return device === 'mac' || device === 'windows';
+        // return device === 'mac' || device === 'windows';
+        return (/mac/ig.test(device) || /windows/ig.test(device)
+        ); // || /windows edge/ig.test(device);
     };
 
     var isAboveIE9 = browser && "oldie" !== browser && "ie9" !== browser;
