@@ -46,7 +46,6 @@
         "gulp-strip-debug": "^1.1.0",
         "gulp-uglify": "^3.0.0",
         "gulp-usemin": "^0.3.28",
-        "jquery": "^1.12.4",
         "normalize.css": "^4.1.1",
         "postcss-import": "^10.0.0",
         "resetcss": "^1.0.3",
