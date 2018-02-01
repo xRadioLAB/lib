@@ -132,7 +132,7 @@ const useminTask = ({ file, name, type, index } = {
     const i = index < 10 ? `0${index}` : index;
     const tips = tipFn(i, type);
     const src = file + name + type;
-    const taskName = tips + src; // task [00] '.html': ./index.html 
+    const taskName = tips + src; // task [00] '.html': ./index.html
 
     // 转载 TASK_usemin
     TASK_usemin.push(taskName);
@@ -295,7 +295,7 @@ gulp.task('autowatch', function () {
     isJs && gulp.watch('js/*.js', TASK_js);
     isStyl && gulp.watch('styl/*.styl', ['styl']);
 
-    if (!(isPug && isJs && isStyl)) {
+    if (!isPug && !isJs && !isStyl) {
         console.log('[gulp autowatch]'.rainbow, 'is off'.info);
         console.log(' --------------------------------------'.gray);
         console.log('    Only'.info, '`browsersync`'.debug, 'now!'.info);
