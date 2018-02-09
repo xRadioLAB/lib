@@ -219,6 +219,13 @@
     const isDev = isDevFn(href);
     const isPc = isPcFn(device);
 
+    // 给 html 添加 is-pc 和 is-mobile 类
+    if (isPc) {
+        html.className += ' is-pc';
+    } else {
+        html.className += ' is-mobile';
+    }
+
     // 输出 BROWSER 对象
     window.BRO = {
         browser: browser,
